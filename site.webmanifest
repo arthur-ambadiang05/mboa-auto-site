@@ -1,0 +1,9 @@
+{
+  "name": "Mboa Auto",
+  "short_name": "Mboa Auto",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#071017",
+  "theme_color": "#071017",
+  "description": "Achat, vente, recherche et location automobile à Yaoundé."
+}

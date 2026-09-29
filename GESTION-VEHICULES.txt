@@ -1,0 +1,14 @@
+MBOA AUTO — GESTION SIMPLIFIÉE DES VÉHICULES
+
+But : ne plus reconstruire le site à chaque ajout.
+
+Workflow recommandé :
+1. Arthur envoie à ChatGPT : photos + marque/modèle + année + prix + carburant + boîte + kilométrage + localisation + caractéristiques.
+2. Le fichier data/vehicules.json sert de registre central du stock.
+3. ChatGPT prépare la nouvelle fiche HTML, ajoute les photos dans assets/cars/<slug>/, met à jour la carte d'accueil et sitemap.xml.
+4. Un ZIP complet prêt pour Netlify est généré.
+5. Arthur le dépose dans Netlify > mboa-auto > Deploys.
+
+Pour un véhicule vendu : passer status à "vendu" puis afficher VENDU ou retirer la fiche du stock selon le choix.
+
+Important : cette version conserve les pages HTML statiques afin de garder le référencement Google, Google Analytics et les liens WhatsApp.
