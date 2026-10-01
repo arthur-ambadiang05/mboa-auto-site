@@ -131,17 +131,42 @@ exports.handler = async function (event) {
       "Content-Type": "application/json"
     };
 
-    const response = await fetch(apiUrl, {
-      method: "PUT",
-      headers,
-      body: JSON.stringify({
-        message: `Ajout photo véhicule : ${slug}/${filename}`,
-        content: cleanBase64,
-        branch: GITHUB_BRANCH
-      })
-    });
+   let existingSha = null;
 
-    if (!response.ok) {
+// Vérifie si la photo existe déjà sur GitHub
+const existingResponse = await fetch(apiUrl, {
+  method: "GET",
+  headers
+});
+
+if (existingResponse.ok) {
+  const existingFile = await existingResponse.json();
+  existingSha = existingFile.sha;
+} else if (existingResponse.status !== 404) {
+  const errorText = await existingResponse.text();
+  console.error("GitHub check error:", errorText);
+
+  return jsonResponse(502, {
+    error: "Impossible de vérifier l'image existante"
+  });
+}
+
+const githubBody = {
+  message: `Ajout photo véhicule : ${slug}/${filename}`,
+  content: cleanBase64,
+  branch: GITHUB_BRANCH
+};
+
+// Si la photo existe déjà, GitHub exige son SHA pour la remplacer
+if (existingSha) {
+  githubBody.sha = existingSha;
+}
+
+const response = await fetch(apiUrl, {
+  method: "PUT",
+  headers,
+  body: JSON.stringify(githubBody)
+});    if (!response.ok) {
       const errorText = await response.text();
       console.error("GitHub upload error:", errorText);
 
