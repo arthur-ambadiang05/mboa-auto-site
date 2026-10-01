@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Ajouter un véhicule | Mboa Auto</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b1018;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #131a24;
+      border-bottom: 1px solid #263140;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #ef4444;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      border: 1px solid #374151;
+      padding: 10px 14px;
+      border-radius: 8px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 35px auto;
+      padding: 0 20px 50px;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #9ca3af;
+      margin-bottom: 28px;
+    }
+
+    form {
+      background: #131a24;
+      border: 1px solid #263140;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: #d1d5db;
+      font-size: 14px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #374151;
+      border-radius: 9px;
+      background: #0b1018;
+      color: white;
+      font-size: 15px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #ef4444;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    #message {
+      margin-top: 18px;
+      text-align: center;
+      min-height: 22px;
+    }
+
+    #loading {
+      position: fixed;
+      inset: 0;
+      background: #0b1018;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="loading">Vérification de la connexion...</div>
+
+  <header>
+    <div class="logo">MBOA <span>AUTO</span></div>
+    <a class="back" href="/admin/dashboard.html">← Tableau de bord</a>
+  </header>
+
+  <main>
+    <h1>Ajouter un véhicule</h1>
+    <p class="subtitle">
+      Remplissez les informations du véhicule à publier sur Mboa Auto.
+    </p>
+
+    <form id="vehicleForm">
+
+      <div class="grid">
+
+        <div>
+          <label for="brand">Marque</label>
+          <input id="brand" name="brand" placeholder="Toyota" required>
+        </div>
+
+        <div>
+          <label for="name">Nom / Modèle</label>
+          <input id="name" name="name" placeholder="Toyota RAV4 2022" required>
+        </div>
+
+        <div>
+          <label for="year">Année</label>
+          <input id="year" name="year" type="number" min="1950" max="2100" required>
+        </div>
+
+        <div>
+          <label for="type">Type</label>
+          <select id="type" name="type" required>
+            <option value="">Choisir</option>
+            <option value="SUV">SUV</option>
+            <option value="Berline">Berline</option>
+            <option value="Pick-up">Pick-up</option>
+            <option value="4x4">4x4</option>
+            <option value="Monospace">Monospace</option>
+            <option value="Coupé">Coupé</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="fuel">Carburant</label>
+          <select id="fuel" name="fuel" required>
+            <option value="">Choisir</option>
+            <option value="Essence">Essence</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Hybride">Hybride</option>
+            <option value="Électrique">Électrique</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="price">Prix en FCFA</label>
+          <input
+            id="price"
+            name="price"
+            type="number"
+            placeholder="18000000"
+            required
+          >
+        </div>
+
+        <div>
+          <label for="location">Localisation</label>
+          <input
+            id="location"
+            name="location"
+            placeholder="Yaoundé"
+            value="Yaoundé"
+            required
+          >
+        </div>
+
+        <div>
+          <label for="status">Statut</label>
+          <select id="status" name="status">
+            <option value="disponible">Disponible</option>
+            <option value="vendu">Vendu</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label for="specs">Caractéristiques principales</label>
+          <input
+            id="specs"
+            name="specs"
+            placeholder="Automatique • Essence • 4x4 • 51 843 km • Climatisation..."
+            required
+          >
+        </div>
+
+        <div class="full">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Décrivez le véhicule..."
+            required
+          ></textarea>
+        </div>
+
+        <div>
+          <label for="cover">Photo principale</label>
+          <input
+            id="cover"
+            name="cover"
+            placeholder="01.jpg"
+            value="01.jpg"
+            required
+          >
+        </div>
+
+        <div>
+          <label for="photos">Nombre de photos</label>
+          <input
+            id="photos"
+            name="photos"
+            type="number"
+            min="1"
+            value="1"
+            required
+          >
+        </div>
+
+      </div>
+
+      <button id="submitButton" type="submit">
+        Publier le véhicule
+      </button>
+
+      <div id="message"></div>
+
+    </form>
+  </main>
+
+  <script>
+    async function checkSession() {
+      try {
+        const response = await fetch("/.netlify/functions/admin-session");
+
+        if (!response.ok) {
+          window.location.href = "/admin/";
+          return;
+        }
+
+        document.getElementById("loading").style.display = "none";
+      } catch (error) {
+        window.location.href = "/admin/";
+      }
+    }
+
+    function createSlug(text) {
+      return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function formatPrice(price) {
+      return Number(price).toLocaleString("fr-FR") + " FCFA";
+    }
+
+    const form = document.getElementById("vehicleForm");
+    const button = document.getElementById("submitButton");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      button.disabled = true;
+      button.textContent = "Publication...";
+      message.textContent = "";
+
+      const formData = new FormData(form);
+
+      const vehicle = {
+        slug: createSlug(formData.get("name")),
+        brand: formData.get("brand").trim(),
+        name: formData.get("name").trim(),
+        year: Number(formData.get("year")),
+        type: formData.get("type"),
+        fuel: formData.get("fuel"),
+        price: Number(formData.get("price")),
+        price_display: formatPrice(formData.get("price")),
+        location: formData.get("location").trim(),
+        specs: formData.get("specs").trim(),
+        description: formData.get("description").trim(),
+        cover: formData.get("cover").trim(),
+        photos: Number(formData.get("photos")),
+        status: formData.get("status")
+      };
+
+      try {
+        const response = await fetch(
+          "/.netlify/functions/admin-add-vehicle",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(vehicle)
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Publication impossible");
+        }
+
+        message.style.color = "#22c55e";
+        message.textContent = "Véhicule ajouté avec succès.";
+
+        form.reset();
+
+      } catch (error) {
+        message.style.color = "#ef4444";
+        message.textContent = error.message;
+      } finally {
+        button.disabled = false;
+        button.textContent = "Publier le véhicule";
+      }
+    });
+
+    checkSession();
+  </script>
+
+</body>
+</html>
