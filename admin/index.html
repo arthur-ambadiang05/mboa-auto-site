@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Mboa Auto Admin</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(220, 38, 38, 0.16), transparent 35%),
+        #0b1018;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 420px;
+      background: #131a24;
+      border: 1px solid #263140;
+      border-radius: 20px;
+      padding: 35px 28px;
+      box-shadow: 0 25px 60px rgba(0,0,0,.4);
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .brand h1 {
+      font-size: 30px;
+      margin-bottom: 6px;
+    }
+
+    .brand h1 span {
+      color: #ef4444;
+    }
+
+    .brand p {
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #d1d5db;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 15px;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      background: #0b1018;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #ef4444;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #ef4444;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    #message {
+      min-height: 22px;
+      margin-top: 16px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      color: #9ca3af;
+      text-decoration: none;
+      margin-top: 22px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-box">
+    <div class="brand">
+      <h1>MBOA <span>AUTO</span></h1>
+      <p>Espace d'administration</p>
+    </div>
+
+    <form id="loginForm">
+      <label for="password">Mot de passe administrateur</label>
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Votre mot de passe"
+        autocomplete="current-password"
+        required
+      >
+
+      <button id="loginButton" type="submit">
+        Se connecter
+      </button>
+
+      <div id="message"></div>
+    </form>
+
+    <a href="/" class="back">← Retour au site Mboa Auto</a>
+  </div>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const passwordInput = document.getElementById("password");
+    const button = document.getElementById("loginButton");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      button.disabled = true;
+      button.textContent = "Connexion...";
+      message.textContent = "";
+
+      try {
+        const response = await fetch("/.netlify/functions/admin-login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            password: passwordInput.value
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Connexion impossible");
+        }
+
+        message.style.color = "#22c55e";
+        message.textContent = "Connexion réussie.";
+
+        setTimeout(() => {
+          window.location.href = "/admin/dashboard.html";
+        }, 600);
+
+      } catch (error) {
+        message.style.color = "#ef4444";
+        message.textContent = error.message;
+        passwordInput.value = "";
+        passwordInput.focus();
+      } finally {
+        button.disabled = false;
+        button.textContent = "Se connecter";
+      }
+    });
+  </script>
+
+</body>
+</html>

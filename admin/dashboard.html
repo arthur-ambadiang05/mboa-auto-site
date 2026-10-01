@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Administration | Mboa Auto</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b1018;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #131a24;
+      border-bottom: 1px solid #263140;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .logo span { color: #ef4444; }
+
+    .logout {
+      border: 1px solid #374151;
+      background: transparent;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #9ca3af;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: #131a24;
+      border: 1px solid #263140;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #9ca3af;
+      margin-bottom: 20px;
+    }
+
+    .primary {
+      background: #ef4444;
+      color: white;
+      border: 0;
+      padding: 14px 20px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #loading {
+      position: fixed;
+      inset: 0;
+      background: #0b1018;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      z-index: 10;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="loading">Vérification de la connexion...</div>
+
+  <header>
+    <div class="logo">MBOA <span>AUTO</span></div>
+    <button class="logout" id="logout">Déconnexion</button>
+  </header>
+
+  <main>
+    <h1>Tableau de bord</h1>
+    <p class="subtitle">Gestion des véhicules Mboa Auto</p>
+
+    <div class="card">
+      <h2>🚗 Véhicules</h2>
+      <p>
+        Depuis cet espace, vous pourrez ajouter et publier un nouveau véhicule
+        directement sur mboaauto.com.
+      </p>
+
+      <button class="primary" id="addVehicle">
+        + Ajouter un véhicule
+      </button>
+    </div>
+  </main>
+
+  <script>
+    async function checkSession() {
+      try {
+        const response = await fetch("/.netlify/functions/admin-session");
+
+        if (!response.ok) {
+          window.location.href = "/admin/";
+          return;
+        }
+
+        document.getElementById("loading").style.display = "none";
+      } catch (error) {
+        window.location.href = "/admin/";
+      }
+    }
+
+    document.getElementById("logout").addEventListener("click", async () => {
+      await fetch("/.netlify/functions/admin-logout", {
+        method: "POST"
+      });
+
+      window.location.href = "/admin/";
+    });
+
+    document.getElementById("addVehicle").addEventListener("click", () => {
+      alert("Le formulaire d'ajout de véhicule arrive à l'étape suivante.");
+    });
+
+    checkSession();
+  </script>
+
+</body>
+</html>
