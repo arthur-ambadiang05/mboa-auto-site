@@ -5,7 +5,7 @@ const COOKIE_NAME = "mboa_admin_session";
 const GITHUB_OWNER = "arthur-ambadiang05";
 const GITHUB_REPO = "mboa-auto-site";
 const GITHUB_BRANCH = "main";
-const VEHICLES_FILE = "data/vehicles.json";
+const VEHICLES_FILE = "data/vehicules.json";
 
 function parseCookies(cookieHeader = "") {
   return cookieHeader
@@ -161,7 +161,7 @@ exports.handler = async function (event) {
 
     if (!Array.isArray(vehicles)) {
       return jsonResponse(500, {
-        error: "Format de vehicles.json invalide"
+        error: "Format de vehicules.json invalide"
       });
     }
 
