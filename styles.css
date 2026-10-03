@@ -27,3 +27,21 @@
 @media(max-width:1100px){.advanced-search{grid-template-columns:repeat(3,1fr)}.advanced-search .search-title{grid-column:1/-1}}
 @media(max-width:760px){.lead-hub-grid{grid-template-columns:1fr}.advanced-search{grid-template-columns:1fr 1fr}}
 @media(max-width:580px){.advanced-search{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.latest-arrivals .section-head{display:block}.text-link{display:inline-block;margin-top:10px}}
+
+/* Brand and category shortcuts */
+.quick-browse{background:#f5f7f8;padding:58px 5% 68px}
+.quick-wrap{max-width:1400px;margin:auto}
+.quick-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:26px}
+.quick-head h2{font-size:36px;line-height:1.05;margin:0;letter-spacing:-1.4px}
+.quick-head>p{max-width:440px;color:var(--muted);line-height:1.6;margin:0}
+.type-chips,.brand-chips{display:flex;gap:9px;flex-wrap:wrap}
+.type-chips{margin-bottom:30px}
+.type-chips button,.brand-chip{border:1px solid #d8e0e4;background:#fff;color:var(--ink);border-radius:999px;padding:10px 14px;font-weight:850;font-size:12px;cursor:pointer;transition:.2s}
+.type-chips button:hover,.brand-chip:hover{border-color:var(--red);color:var(--red);transform:translateY(-1px)}
+.brand-area{border-top:1px solid #dde4e7;padding-top:24px}
+.brand-area h3{font-size:16px;margin:0 0 14px}
+.all-brands-panel{margin-top:16px}
+.all-brands-panel summary{cursor:pointer;font-weight:900;color:var(--red);font-size:13px}
+.all-brands{margin-top:14px}
+@media(max-width:760px){.quick-head{display:block}.quick-head>p{margin-top:10px}.quick-head h2{font-size:30px}}
+@media(max-width:580px){.quick-browse{padding:46px 18px}.type-chips button,.brand-chip{padding:9px 12px;font-size:11px}}
