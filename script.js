@@ -26,3 +26,20 @@ if(resetBtn)resetBtn.addEventListener('click',()=>{
 });
 const lead=document.querySelector('#leadForm');if(lead)lead.addEventListener('submit',e=>{e.preventDefault();const n=document.querySelector('#name').value.trim(),p=document.querySelector('#phone').value.trim(),need=document.querySelector('#need').value,m=document.querySelector('#message').value.trim();const text=`Bonjour Mboa Auto, je suis ${n}.\nTéléphone : ${p}\nBesoin : ${need}\n${m}`;window.open('https://wa.me/237691650428?text='+encodeURIComponent(text),'_blank','noopener,noreferrer')});
 const main=document.querySelector('#mainVehicleImage');document.querySelectorAll('.detail-thumb').forEach(b=>b.addEventListener('click',()=>{if(main){main.src=b.dataset.src;main.alt=b.querySelector('img')?.alt||main.alt;document.querySelectorAll('.detail-thumb').forEach(x=>x.classList.remove('active'));b.classList.add('active');main.scrollIntoView({behavior:'smooth',block:'center'})}}));
+
+// Explicit WhatsApp click tracking.
+// Some mobile browsers open the WhatsApp app before GA4 Enhanced Measurement records the outbound click.
+// Sending the GA4 "click" event ourselves preserves the existing custom event rule:
+// click + link_url contains wa.me => whatsapp_click.
+document.addEventListener('click',e=>{
+  const link=e.target.closest('a[href*="wa.me"]');
+  if(!link) return;
+  if(typeof window.gtag==='function'){
+    window.gtag('event','click',{
+      link_url:link.href,
+      link_domain:'wa.me',
+      outbound:true,
+      transport_type:'beacon'
+    });
+  }
+},{capture:true});
