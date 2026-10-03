@@ -117,7 +117,7 @@ exports.handler = async function (event) {
       ""
     );
 
-    const filePath = `assets/vehicles/${slug}/${filename}`;
+    const filePath = `assets/cars/${slug}/${filename}`;
 
     const apiUrl =
       `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}` +
@@ -152,7 +152,7 @@ if (existingResponse.ok) {
 }
 
 const githubBody = {
-  message: `Ajout photo véhicule : ${slug}/${filename}`,
+  message: `[skip netlify] Ajout photo véhicule : ${slug}/${filename}`,
   content: cleanBase64,
   branch: GITHUB_BRANCH
 };
