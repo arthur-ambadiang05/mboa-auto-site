@@ -26,7 +26,9 @@
         return '<article class="card" data-brand="' + esc(vehicle.brand) +
           '" data-type="' + esc(vehicle.type) +
           '" data-year="' + esc(vehicle.year) +
-          '" data-fuel="' + esc(vehicle.fuel) + '">' +
+          '" data-fuel="' + esc(vehicle.fuel) +
+          '" data-price="' + esc(vehicle.price) +
+          '" data-search="' + esc((vehicle.brand||"") + " " + (vehicle.name||"") + " " + (vehicle.specs||"")) + '">' +
           '<a class="card-photo" href="' + detailUrl + '">' +
           '<img src="/assets/cars/' + esc(vehicle.slug) + '/' + esc(vehicle.cover || "01.jpg") +
           '" alt="' + esc(vehicle.name) + ' à vendre à ' + esc(vehicle.location) + '" loading="lazy">' +
