@@ -176,7 +176,7 @@
 
         <div>
           <label for="brand">Marque</label>
-          <input id="brand" name="brand" placeholder="Toyota" required>
+          <input id="brand" name="brand" list="brandOptions" placeholder="Toyota" required><datalist id="brandOptions" data-brand-list></datalist>
         </div>
 
         <div>
@@ -488,5 +488,5 @@ const vehicle = {
     checkSession();
   </script>
 
-</body>
+<script src="/brands.js" defer></script></body>
 </html>
