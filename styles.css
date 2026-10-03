@@ -3,3 +3,27 @@
 @media(max-width:580px){.header{height:68px;padding:0 18px}.nav{top:68px}.hero-v6{min-height:610px}.hero-media img{object-position:64% center}.hero-shade{background:linear-gradient(0deg,rgba(3,9,13,.96) 0%,rgba(3,9,13,.68) 70%,rgba(3,9,13,.32) 100%)}.hero-content{padding:130px 20px 70px}.hero h1{font-size:45px;letter-spacing:-2px}.hero-sub{font-size:16px}.hero-actions{flex-direction:column}.trustline{flex-wrap:wrap;gap:10px 16px}.searchbar{margin:-30px 15px 0;max-width:none;grid-template-columns:1fr}.section{padding:58px 18px}.section h2{font-size:34px}.section-head{display:block}.inventory-count{display:inline-block;margin-top:14px}.cards{grid-template-columns:1fr}.card-photo{height:235px}.service-grid{grid-template-columns:1fr}.manifesto{grid-template-columns:1fr;padding:58px 18px;gap:25px}.manifesto h2{font-size:42px}.about-v6,.contact{grid-template-columns:1fr;gap:30px}.mini-stats{grid-template-columns:1fr}.footer{grid-template-columns:1fr;padding:38px 18px 90px}.vehicle-detail{padding:0 15px 70px}.breadcrumbs{padding:20px 15px}.detail-main{height:310px}.detail-thumbs{grid-template-columns:repeat(3,1fr)}.detail-thumb{height:85px}.vehicle-info{padding:22px}.vehicle-info h1{font-size:29px}.contact-lines{flex-direction:column;gap:6px}}
 /* V7 conversion, trust and accessibility */
 :focus-visible{outline:3px solid #ff3b30;outline-offset:3px}.filter-status{color:#c5cdd2;font-size:13px;margin:-14px 0 18px;min-height:18px}.card[hidden]{display:none!important}.reassurance{background:#fff}.reassurance-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.reassurance-grid article{border:1px solid var(--line);border-radius:10px;padding:24px;display:grid;gap:10px}.reassurance-grid strong{font-size:18px}.reassurance-grid span{font-size:13px;color:var(--muted);line-height:1.6}.faq{background:#f5f7f8}.faq details{max-width:900px;border-top:1px solid #dbe1e4;padding:18px 0}.faq details:last-child{border-bottom:1px solid #dbe1e4}.faq summary{cursor:pointer;font-weight:900}.faq details p{color:var(--muted);line-height:1.65;margin:12px 0 0}.detail-thumb.active{outline:3px solid var(--red);outline-offset:2px}@media(max-width:950px){.reassurance-grid{grid-template-columns:1fr 1fr}}@media(max-width:580px){.reassurance-grid{grid-template-columns:1fr}.filter-status{margin-top:-8px}}
+
+/* Growth improvements */
+.advanced-search{grid-template-columns:1.1fr 1fr 1fr 1fr 1fr .85fr 1fr auto auto}
+.advanced-search input,.advanced-search select{width:100%;border:1px solid var(--line);border-radius:7px;padding:13px;background:#fff;font:inherit;min-width:0}
+.reset-filter{background:#eef2f4;color:var(--ink);border:1px solid var(--line)}
+.latest-arrivals{background:#fff}
+.latest-arrivals .section-head{align-items:center}
+.text-link{font-size:13px;font-weight:900;color:var(--red)}
+.latest-grid .card{border:1px solid var(--line);box-shadow:0 8px 22px rgba(7,16,23,.08)}
+.new-tag{background:#111d24}
+.lead-hub{background:#071017;color:#fff}
+.lead-hub .section-intro>p:last-child{color:#aeb8be}
+.lead-hub-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.lead-card{background:#101a21;border:1px solid #26343d;border-radius:14px;padding:26px;display:grid;gap:12px}
+.lead-card h3{font-size:25px;margin:4px 0 0}
+.lead-card>p{color:#aeb8be;line-height:1.6;margin:0 0 6px}
+.lead-card input,.lead-card textarea{width:100%;border:1px solid #34424b;background:#0b141a;color:#fff;border-radius:8px;padding:13px;font:inherit}
+.lead-card input::placeholder,.lead-card textarea::placeholder{color:#81909a}
+.lead-card small{color:#84939d;line-height:1.5}
+.lead-step{font-size:11px;font-weight:950;color:var(--red);letter-spacing:1px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:1100px){.advanced-search{grid-template-columns:repeat(3,1fr)}.advanced-search .search-title{grid-column:1/-1}}
+@media(max-width:760px){.lead-hub-grid{grid-template-columns:1fr}.advanced-search{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.advanced-search{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.latest-arrivals .section-head{display:block}.text-link{display:inline-block;margin-top:10px}}
