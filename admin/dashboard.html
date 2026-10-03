@@ -118,6 +118,9 @@
       <button class="primary" id="addVehicle">
         + Ajouter un véhicule
       </button>
+      <button class="primary" id="manageVehicles" style="margin-left:10px;background:#374151;">
+        Gérer les véhicules
+      </button>
     </div>
   </main>
 
@@ -147,6 +150,9 @@
 
    document.getElementById("addVehicle").addEventListener("click", () => {
   window.location.href = "/admin/add-vehicle.html";
+});
+document.getElementById("manageVehicles").addEventListener("click", () => {
+  window.location.href = "/admin/vehicles.html";
 }); 
     checkSession();
   </script>
