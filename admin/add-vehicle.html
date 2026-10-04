@@ -226,6 +226,15 @@
         </div>
 
         <div>
+          <label for="priceWords">Prix en lettres</label>
+          <input
+            id="priceWords"
+            name="price_words"
+            placeholder="Ex. Trente-cinq millions de francs CFA"
+          >
+        </div>
+
+        <div>
           <label for="location">Localisation</label>
           <input
             id="location"
@@ -441,11 +450,13 @@ const vehicle = {
       fuel: formData.get("fuel"),
       price: Number(formData.get("price")),
       price_display: formatPrice(formData.get("price")),
+      price_words: String(formData.get("price_words") || "").trim(),
       location: formData.get("location").trim(),
       specs: formData.get("specs").trim(),
       description: formData.get("description").trim(),
       cover: "01.jpg",
       photos: files.length,
+      photo_files: files.map((_, i) => String(i + 1).padStart(2, "0") + ".jpg"),
       status: formData.get("status")
     };
 
