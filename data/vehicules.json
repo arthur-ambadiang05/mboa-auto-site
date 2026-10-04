@@ -143,5 +143,21 @@
     "cover": "01.jpg",
     "photos": 5,
     "status": "disponible"
+  },
+  {
+    "slug": "glc43-coupe",
+    "brand": "Mercedes-Benz",
+    "name": "GLc43 coupé",
+    "year": 2018,
+    "type": "Coupé",
+    "fuel": "Essence",
+    "price": 35000000,
+    "price_display": "35 000 000 FCFA",
+    "location": "Yaoundé",
+    "specs": "Mercedes-AMG GLC 43 Coupé 4MATIC 2018 importé des États-Unis. Peinture d’origine Rouge Hyacinth métallisé, moteur V6 3.0L BiTurbo essence AMG, boîte automatique 9G-TRONIC à palettes et transmission intégrale 4MATIC. Véhicule visible à Yaoundé sur rendez-vous.",
+    "description": "V6 3.0L BiTurbo M276 • 4MATIC 4×4 • 9 rapports avec palettes • Climatisation bi-zone • Caméra 360° • Capteurs de proximité • Phares LED/Xénon directionnels Intelligent Light System • Burmester • Toit ouvrant • Sièges cuir/microfibre chauffants, électriques et à mémoire • Volant sport chauffant • Start/Stop • Modes Sport, Sport+ AMG, Confort et Eco • Suspension ajustable • Hayon électrique avec ouverture au pied • Rétroviseurs rabattables électriques avec caméra • Pneus Michelin Sport 255/45R20 M+S neufs • Quadruple sortie d’échappement.",
+    "cover": "01.jpg",
+    "photos": 10,
+    "status": "disponible"
   }
 ]
