@@ -30,10 +30,13 @@
       }
       canonical.href = location.origin + "/vehicules/vehicle.html?slug=" + encodeURIComponent(slug);
 
-      const photos = [];
-      for (let i = 1; i <= Number(v.photos || 1); i++) {
-        photos.push("/assets/cars/" + slug + "/" + String(i).padStart(2, "0") + ".jpg");
-      }
+      const files = Array.isArray(v.photo_files) && v.photo_files.length
+        ? v.photo_files
+        : Array.from({length: Number(v.photos || 1)}, (_, i) => String(i + 1).padStart(2, "0") + ".jpg");
+
+      const coverFile = files.includes(v.cover) ? v.cover : files[0];
+      const orderedFiles = [coverFile, ...files.filter(name => name !== coverFile)];
+      const photos = orderedFiles.map(name => "/assets/cars/" + slug + "/" + name);
 
       const thumbs = photos.map((src, i) =>
         '<button class="detail-thumb" data-src="' + src + '">' +
@@ -57,6 +60,7 @@
             '<p class="eyebrow">' + esc(v.brand) + ' • ' + esc(v.year) + '</p>' +
             '<h1>' + esc(v.name) + '</h1>' +
             '<div class="detail-price">' + esc(v.price_display) + '</div>' +
+            (v.price_words ? '<p class="price-words" style="margin-top:-8px;color:#9ca3af;font-size:14px">' + esc(v.price_words) + '</p>' : '') +
             '<p class="detail-desc">' + esc(v.description) + '</p>' +
             '<div class="fact-grid">' +
               '<span><small>Année</small><strong>' + esc(v.year) + '</strong></span>' +
