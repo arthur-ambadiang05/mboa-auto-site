@@ -1,0 +1,4 @@
+import { Tabs } from 'expo-router';
+import { Text } from 'react-native';
+import { colors } from '../../components/ui';
+export default function TabLayout() { return <Tabs screenOptions={{ headerShown: false, tabBarActiveTintColor: colors.red, tabBarInactiveTintColor: colors.muted, tabBarStyle: { backgroundColor: '#fff', borderTopColor: colors.line, paddingTop: 6 }, tabBarLabelStyle: { fontSize: 11, fontWeight: '700' } }}><Tabs.Screen name="index" options={{ title: 'Catalogue', tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 24 }}>⌂</Text> }} /><Tabs.Screen name="favoris" options={{ title: 'Favoris', tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 24 }}>♡</Text> }} /><Tabs.Screen name="contact" options={{ title: 'Contact', tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 24 }}>↗</Text> }} /></Tabs>; }

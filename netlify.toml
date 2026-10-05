@@ -1,0 +1,8 @@
+[build]
+  command = "node scripts/build-site.mjs"
+  publish = "public-site"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+  EXPO_NO_TELEMETRY = "1"

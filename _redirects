@@ -1,2 +1,3 @@
 http://mboaauto.com/* https://mboaauto.com/:splat 301!
 https://www.mboaauto.com/* https://mboaauto.com/:splat 301!
+/application/* /application/index.html 200
