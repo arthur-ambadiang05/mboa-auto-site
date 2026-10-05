@@ -10,7 +10,7 @@ Les favoris et le dernier catalogue sont stockés sur l’appareil. Les photos n
 
 ## Versions installables
 
-Associer d’abord le projet Expo à un compte appartenant à Mboa Auto (`npx eas-cli@latest login`, puis `npx eas-cli@latest init`). Aucun identifiant EAS ou compte de store n’a encore été configuré.
+Le projet est configuré pour l’organisation Expo `mboa-auto-cameroun`, projet `mboa-auto`, ID `25e3eee3-2bd8-4b5e-be10-d1a6ac937c30`. Depuis ce dossier, se connecter au compte propriétaire avec `npx eas-cli@latest login`, puis contrôler le rattachement avec `npx eas-cli@latest project:info`. Aucun compte de store ni identifiant de signature n’a encore été configuré.
 
 - Android de test : `npx eas-cli@latest build --platform android --profile preview` (APK).
 - Développement natif : profil `development` ; nécessite un development build.
