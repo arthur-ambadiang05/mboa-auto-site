@@ -4,19 +4,20 @@ const OWNER="arthur-ambadiang05", REPO="mboa-auto-site", BRANCH="main", FILE="da
 
 function cookies(h=""){return h.split(";").map(x=>x.trim()).filter(Boolean).reduce((a,c)=>{const i=c.indexOf("=");if(i>-1)a[c.slice(0,i)]=c.slice(i+1);return a;},{});}
 function validSession(s,secret){if(!s||!secret)return false;const p=s.split(".");if(p.length!==2)return false;const [e,sig]=p;const exp=crypto.createHmac("sha256",secret).update(e).digest("hex");const a=Buffer.from(sig),b=Buffer.from(exp);return a.length===b.length&&crypto.timingSafeEqual(a,b)&&Number(e)>Math.floor(Date.now()/1000);}
-function out(code,data){return{statusCode:code,headers:{"Content-Type":"application/json"},body:JSON.stringify(data)};}
+function out(code,data){return{statusCode:code,headers:{"Content-Type":"application/json","Cache-Control":"no-store"},body:JSON.stringify(data)};}
 function ghHeaders(t){return{Authorization:"Bearer "+t,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28","User-Agent":"Mboa-Auto-Admin","Content-Type":"application/json"};}
 
 exports.handler=async(event)=>{
-  if(event.httpMethod!=="POST") return out(405,{error:"Méthode non autorisée"});
+  if(!["GET","POST"].includes(event.httpMethod)) return out(405,{error:"Méthode non autorisée"});
   const secret=process.env.MBOA_ADMIN_SESSION_SECRET, token=process.env.MBOA_GITHUB_TOKEN;
   if(!secret||!token) return out(500,{error:"Configuration serveur incomplète"});
   if(!validSession(cookies(event.headers.cookie||"")[COOKIE_NAME],secret)) return out(401,{error:"Session administrateur invalide"});
 
   try{
+    if(event.httpMethod==="POST" && event.headers.origin && event.headers.origin!=="https://mboaauto.com") return out(403,{error:"Origine non autorisée"});
     const body=JSON.parse(event.body||"{}");
     const action=body.action, slug=String(body.slug||"").trim();
-    if(!/^[a-z0-9-]+$/.test(slug)) return out(400,{error:"Identifiant véhicule invalide"});
+    if(event.httpMethod!=="GET" && !/^[a-z0-9-]+$/.test(slug)) return out(400,{error:"Identifiant véhicule invalide"});
 
     const url=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}?ref=${BRANCH}`;
     const headers=ghHeaders(token);
@@ -24,16 +25,22 @@ exports.handler=async(event)=>{
     if(!r.ok) throw new Error("Lecture du registre impossible");
     const f=await r.json();
     const vehicles=JSON.parse(Buffer.from(f.content,"base64").toString("utf8"));
+    if(event.httpMethod==="GET") return out(200,{vehicles});
     const idx=vehicles.findIndex(v=>v.slug===slug);
     if(idx===-1) return out(404,{error:"Véhicule introuvable"});
 
     let message="";
-    if(action==="delete"){
+    if(action==="status"){
+      if(!["disponible","reserve","vendu"].includes(body.status)) return out(400,{error:"Statut invalide"});
+      vehicles[idx].status=body.status;
+      message="Statut véhicule : "+slug;
+    }else if(action==="delete"){
       vehicles.splice(idx,1);
       message="Suppression annonce : "+slug;
     }else if(action==="update"){
       const v=body.vehicle||{};
       const keepSlug=vehicles[idx].slug;
+      if(!["disponible","reserve","vendu"].includes(v.status)) return out(400,{error:"Statut invalide"});
       const fields=["brand","name","year","type","fuel","price","price_display","location","specs","description","status"];
       for(const k of fields){ if(v[k]===undefined||v[k]===null||v[k]==="") return out(400,{error:"Champ manquant : "+k}); }
       vehicles[idx]={...vehicles[idx],...v,slug:keepSlug,year:Number(v.year),price:Number(v.price)};
