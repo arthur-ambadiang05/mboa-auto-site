@@ -16,14 +16,14 @@
 
       const available = vehicles.filter(v => v.status === "disponible");
 
-      grid.innerHTML = available.map(vehicle => {
+      grid.innerHTML = available.map((vehicle, index) => {
         const detailUrl = vehicle.detail_url || ("/vehicules/vehicle.html?slug=" + encodeURIComponent(vehicle.slug));
         const waText = encodeURIComponent(
           "Bonjour Mboa Auto, je souhaite avoir des informations sur " +
           vehicle.name + " affiché à " + vehicle.price_display + "."
         );
 
-        return '<article class="card" data-brand="' + esc(vehicle.brand) +
+        return '<article class="card" data-catalog-order="' + (index + 1) + '" data-brand="' + esc(vehicle.brand) +
           '" data-type="' + esc(vehicle.type) +
           '" data-year="' + esc(vehicle.year) +
           '" data-fuel="' + esc(vehicle.fuel) +
@@ -42,6 +42,8 @@
           '<a class="wa" href="https://wa.me/237691650428?text=' + waText +
           '" target="_blank" rel="noopener noreferrer">WhatsApp</a></div></div></article>';
       }).join("");
+
+      if (typeof applyVehicleFilters === 'function') applyVehicleFilters();
 
       const countEl = document.querySelector(".inventory-count");
       if (countEl) countEl.textContent = available.length + " véhicule" + (available.length > 1 ? "s" : "");
