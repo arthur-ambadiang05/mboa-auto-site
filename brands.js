@@ -5,7 +5,7 @@
     "Daihatsu","Dodge","Dongfeng","DS Automobiles","Ferrari","Fiat","Ford","Foton","Geely",
     "Genesis","GMC","Great Wall","Haval","Honda","Hongqi","Hyundai","Infiniti","Isuzu","Iveco",
     "JAC","Jaguar","Jeep","Jetour","Kia","Lamborghini","Land Rover","Lexus","Lincoln","Maserati",
-    "Mazda","McLaren","Mercedes-Benz","MG","MINI","Mitsubishi","Nissan","Opel","Peugeot","Porsche",
+    "Mazda","McLaren","Mercedes-Benz","Mercedes-AMG","MG","MINI","Mitsubishi","Nissan","Opel","Peugeot","Porsche",
     "RAM","Renault","Rolls-Royce","SEAT","Škoda","Smart","Subaru","Suzuki","Tata","Tesla",
     "Toyota","Volkswagen","Volvo","Wuling","Zeekr"
   ];
@@ -51,7 +51,7 @@
   }
 
   document.addEventListener("click", e => {
-    const brandButton = e.target.closest("[data-brand]");
+    const brandButton = e.target.closest(".brand-chip[data-brand]");
     if (brandButton) applyBrand(brandButton.dataset.brand || "");
 
     const typeButton = e.target.closest("[data-type-filter]");
