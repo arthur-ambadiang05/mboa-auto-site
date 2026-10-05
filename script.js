@@ -27,6 +27,55 @@ if(resetBtn)resetBtn.addEventListener('click',()=>{
 const lead=document.querySelector('#leadForm');if(lead)lead.addEventListener('submit',e=>{e.preventDefault();const n=document.querySelector('#name').value.trim(),p=document.querySelector('#phone').value.trim(),need=document.querySelector('#need').value,m=document.querySelector('#message').value.trim();const text=`Bonjour Mboa Auto, je suis ${n}.\nTéléphone : ${p}\nBesoin : ${need}\n${m}`;window.open('https://wa.me/237691650428?text='+encodeURIComponent(text),'_blank','noopener,noreferrer')});
 const main=document.querySelector('#mainVehicleImage');document.querySelectorAll('.detail-thumb').forEach(b=>b.addEventListener('click',()=>{if(main){main.src=b.dataset.src;main.alt=b.querySelector('img')?.alt||main.alt;document.querySelectorAll('.detail-thumb').forEach(x=>x.classList.remove('active'));b.classList.add('active');main.scrollIntoView({behavior:'smooth',block:'center'})}}));
 
+// Include the exact vehicle listing in every vehicle WhatsApp enquiry.
+(() => {
+  const publicOrigin = 'https://mboaauto.com';
+  function listingUrl(href) {
+    const url = new URL(href, publicOrigin);
+    if (url.origin !== publicOrigin) return null;
+    url.hash = '';
+    // Retain the vehicle identifier, but omit advertising/tracking parameters.
+    const slug = url.searchParams.get('slug');
+    url.search = '';
+    if (slug) url.searchParams.set('slug', slug);
+    return url.href;
+  }
+  function updateLink(link, name, price, href) {
+    const listing = listingUrl(href);
+    if (!name || !listing) return;
+    const wa = new URL(link.href);
+    const message = `Bonjour Mboa Auto, j'ai trouvé votre annonce sur mboaauto.com.\nJe souhaite avoir plus d'informations sur ${name}${price ? ' affiché à ' + price : ''}. Est-il toujours disponible ?\nLien de l'annonce : ${listing}`;
+    if (wa.searchParams.get('text') === message) return;
+    wa.searchParams.set('text', message);
+    link.href = wa.href;
+  }
+  function updateVehicleLinks() {
+    document.querySelectorAll('.card').forEach(card => {
+      const detail = card.querySelector('h3 a') || card.querySelector('a.details');
+      if (!detail) return;
+      const name = card.querySelector('h3')?.textContent.trim();
+      const price = card.querySelector('.price')?.textContent.trim();
+      card.querySelectorAll('a[href*="wa.me/"]').forEach(link => {
+        updateLink(link, name, price, detail.getAttribute('href'));
+      });
+    });
+    const info = document.querySelector('.vehicle-info');
+    if (info && location.pathname.startsWith('/vehicules/')) {
+      const name = info.querySelector('h1')?.textContent.trim();
+      const price = info.querySelector('.detail-price')?.textContent.trim();
+      document.querySelectorAll('a[href*="wa.me/"]').forEach(link => {
+        updateLink(link, name, price, location.pathname + location.search);
+      });
+    }
+  }
+  updateVehicleLinks();
+  // Catalogue and vehicle content are also loaded asynchronously from the admin.
+  ['vehicleGrid', 'latestGrid', 'vehicleDynamic'].forEach(id => {
+    const root = document.getElementById(id);
+    if (root) new MutationObserver(updateVehicleLinks).observe(root, { childList: true, subtree: true });
+  });
+})();
+
 // Explicit WhatsApp click tracking.
 // Some mobile browsers open the WhatsApp app before GA4 Enhanced Measurement records the outbound click.
 // Sending the GA4 "click" event ourselves preserves the existing custom event rule:
