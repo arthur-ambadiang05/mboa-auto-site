@@ -173,6 +173,7 @@ document.addEventListener('click',e=>{
       link.className = 'vehicle-contact-whatsapp';
       link.textContent = 'WhatsApp';
       contact.append(link);
+      wa.remove();
     }
     const call = make('a', 'vehicle-contact-call', 'Appeler');
     call.href = 'tel:+237691650428';
