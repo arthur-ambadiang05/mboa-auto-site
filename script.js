@@ -2,28 +2,58 @@ const menu=document.querySelector('.menu'),nav=document.querySelector('.nav');
 if(menu&&nav){menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'✕':'☰'});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰'}));}
 const searchBtn=document.querySelector('#searchBtn'),resetBtn=document.querySelector('#resetBtn'),status=document.querySelector('#filterStatus');
 function applyVehicleFilters(){
-  const keyword=(document.querySelector('#keywordFilter')?.value||'').trim().toLowerCase();
+  const normalize = value => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const keyword=normalize((document.querySelector('#keywordFilter')?.value||'').trim());
   const brand=document.querySelector('#brandFilter')?.value||'';
   const type=document.querySelector('#typeFilter')?.value||'';
   const fuel=document.querySelector('#fuelFilter')?.value||'';
   const yearMin=Number(document.querySelector('#yearMinFilter')?.value||0);
   const priceMax=Number(document.querySelector('#priceMaxFilter')?.value||0);
+  const grid=document.getElementById('vehicleGrid');
+  if (!grid) return;
+  const cards=[...grid.querySelectorAll('.card')];
   let count=0;
-  document.querySelectorAll('#vehicleGrid .card').forEach(card=>{
-    const text=(card.dataset.search||card.textContent||'').toLowerCase();
+  cards.forEach((card, i)=>{
+    if (!card.dataset.catalogOrder) card.dataset.catalogOrder=String(i+1);
+    const text=normalize(card.dataset.search||card.textContent||'');
     const year=Number(card.dataset.year||0);
-    const price=Number(card.dataset.price||0);
-    const show=(!keyword||text.includes(keyword))&&(!brand||card.dataset.brand===brand)&&(!type||card.dataset.type===type)&&(!fuel||card.dataset.fuel===fuel)&&(!yearMin||year>=yearMin)&&(!priceMax||price<=priceMax);
+    const price=Number(card.dataset.price||card.querySelector('.price')?.textContent.replace(/[^0-9]/g,'')||0);
+    const matchesType = !type || (type==='SUV' ? card.dataset.type?.startsWith('SUV') : type==='4x4' ? /4[×x]4|4matic|awd/i.test(text) : card.dataset.type===type);
+    const show=(!keyword||keyword.split(/\s+/).every(word=>text.includes(word)||text.replace(/\s/g,'').includes(word)))&&(!brand||card.dataset.brand===brand)&&matchesType&&(!fuel||card.dataset.fuel===fuel)&&(!yearMin||year>=yearMin)&&(!priceMax||(price>0&&price<=priceMax));
     card.hidden=!show;
     if(show)count++;
   });
-  if(status)status.textContent=count?`${count} véhicule${count>1?'s':''} correspondant${count>1?'s':''} à votre recherche.`:'Aucun véhicule ne correspond à ces critères. Vous pouvez nous confier une recherche personnalisée.';
+  const sort=document.getElementById('sortFilter')?.value||'newest';
+  const priceOf=card=>Number(card.dataset.price||card.querySelector('.price')?.textContent.replace(/[^0-9]/g,'')||0);
+  const sorted=cards.slice().sort((a,b)=>{
+    const latest=Number(b.dataset.catalogOrder)-Number(a.dataset.catalogOrder);
+    if(sort==='newest') return latest;
+    const pa=priceOf(a),pb=priceOf(b);
+    if(!pa||!pb) return (!pa)-(!pb)||latest;
+    return (sort==='price-asc'?pa-pb:pb-pa)||latest;
+  });
+  if(sorted.some((card,i)=>card!==cards[i])) grid.append(...sorted);
+  if(status)status.textContent=count?`${count} véhicule${count>1?'s':''} correspondant${count>1?'s':''} à votre recherche.`:'Aucun véhicule ne correspond à ces critères. Essayez un budget plus large ou effacez les filtres.';
+  const activeCount=[brand,type,fuel,yearMin].filter(Boolean).length;
+  const badge=document.getElementById('activeFilterCount');
+  if(badge)badge.textContent=activeCount?'('+activeCount+')':'';
 }
-if(searchBtn)searchBtn.addEventListener('click',applyVehicleFilters);
+if(searchBtn)searchBtn.addEventListener('click',()=>{
+  applyVehicleFilters();
+  document.getElementById('vehicules')?.scrollIntoView({behavior:'smooth',block:'start'});
+});
 if(resetBtn)resetBtn.addEventListener('click',()=>{
   ['keywordFilter','brandFilter','typeFilter','fuelFilter','yearMinFilter','priceMaxFilter'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   applyVehicleFilters();
 });
+let vehicleFilterTimer;
+['keywordFilter','priceMaxFilter','yearMinFilter'].forEach(id=>{
+  const el=document.getElementById(id);
+  el?.addEventListener('input',()=>{clearTimeout(vehicleFilterTimer);vehicleFilterTimer=setTimeout(applyVehicleFilters,200);});
+  el?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();searchBtn?.click();}});
+});
+['brandFilter','typeFilter','fuelFilter','sortFilter'].forEach(id=>document.getElementById(id)?.addEventListener('change',applyVehicleFilters));
+applyVehicleFilters();
 const lead=document.querySelector('#leadForm');if(lead)lead.addEventListener('submit',e=>{e.preventDefault();const n=document.querySelector('#name').value.trim(),p=document.querySelector('#phone').value.trim(),need=document.querySelector('#need').value,m=document.querySelector('#message').value.trim();const text=`Bonjour Mboa Auto, je suis ${n}.\nTéléphone : ${p}\nBesoin : ${need}\n${m}`;window.open('https://wa.me/237691650428?text='+encodeURIComponent(text),'_blank','noopener,noreferrer')});
 const main=document.querySelector('#mainVehicleImage');document.querySelectorAll('.detail-thumb').forEach(b=>b.addEventListener('click',()=>{if(main){main.src=b.dataset.src;main.alt=b.querySelector('img')?.alt||main.alt;document.querySelectorAll('.detail-thumb').forEach(x=>x.classList.remove('active'));b.classList.add('active');main.scrollIntoView({behavior:'smooth',block:'center'})}}));
 
