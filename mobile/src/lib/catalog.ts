@@ -23,7 +23,7 @@ export function listingUrl(v: Vehicle): string {
   try { const u = new URL(v.detail_url || '/vehicules/vehicle.html?slug=' + encodeURIComponent(v.slug), SITE); if (u.origin === SITE && u.pathname.startsWith('/vehicules/')) { u.hash = ''; for (const key of [...u.searchParams.keys()]) if (key !== 'slug') u.searchParams.delete(key); return u.toString(); } } catch { /* Use safe fallback */ }
   return SITE + '/vehicules/vehicle.html?slug=' + encodeURIComponent(v.slug);
 }
-export const photoUrl = (v: Vehicle, file = v.cover) => SITE + '/assets/cars/' + v.slug + '/' + encodeURIComponent(filename(file) ? file : v.cover);
+export const photoUrl = (v: Vehicle, file = v.cover) => SITE + '/assets/cars/' + v.slug + '/' + encodeURIComponent(filename(file) ? file : v.cover) + '?app=1';
 export const photos = (v: Vehicle) => [...new Set([v.cover, ...(v.photo_files?.length ? v.photo_files : Array.from({ length: v.photos }, (_, i) => String(i + 1).padStart(2, '0') + '.jpg'))])].map(f => photoUrl(v, f));
 export const money = (n: number) => n.toLocaleString('fr-FR') + ' FCFA';
 export const whatsappUrl = (v: Vehicle) => 'https://wa.me/237691650428?text=' + encodeURIComponent('Bonjour Mboa Auto, je souhaite avoir des informations sur ' + v.name + ' affiché à ' + v.price_display + '. Est-il toujours disponible ?\nLien de l’annonce : ' + listingUrl(v));
