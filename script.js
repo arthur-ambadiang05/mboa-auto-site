@@ -122,7 +122,10 @@ document.addEventListener('click',e=>{
         item.append(make('small', '', label), make('strong', '', value));
         facts.append(item);
       });
-      facts.before(make('h2', 'vehicle-facts-title', 'En un coup d’œil'));
+      const title = make('h2', 'vehicle-facts-title', 'En un coup d’œil');
+      const description = info.querySelector('.detail-desc');
+      if (description) description.before(title, facts);
+      else facts.before(title);
     }
     info.querySelectorAll('.detail-spec p, p.detail-desc').forEach(p => {
       const items = p.textContent.split('•').map(s => s.trim()).filter(Boolean);
