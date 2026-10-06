@@ -49,7 +49,7 @@
 
       const wa = encodeURIComponent(
         "Bonjour Mboa Auto, je suis intéressé par " + v.name +
-        " affiché à " + v.price_display + ". Est-il toujours disponible ?"
+        " affiché à " + v.price_display + ". Est-il toujours disponible ?\nLien de l’annonce : " + new URL(v.detail_url || "/vehicules/annonce-" + encodeURIComponent(slug) + ".html", "https://mboaauto.com").href
       );
 
       root.innerHTML =

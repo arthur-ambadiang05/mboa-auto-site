@@ -27,7 +27,7 @@
               '<div class="specs">' + esc(vehicle.specs) + '</div>' +
               '<div class="card-actions"><a class="details" href="' + detailUrl + '">Voir le véhicule</a>' +
               '<a class="wa" href="https://wa.me/237691650428?text=' +
-              encodeURIComponent("Bonjour Mboa Auto, je souhaite avoir des informations sur " + vehicle.name + " affiché à " + vehicle.price_display + ".") +
+              encodeURIComponent("Bonjour Mboa Auto, je souhaite avoir des informations sur " + vehicle.name + " affiché à " + vehicle.price_display + ". Est-il toujours disponible ?\nLien de l’annonce : " + new URL(detailUrl, "https://mboaauto.com").href) +
               '" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>' +
             '</div></article>';
         }).join("");

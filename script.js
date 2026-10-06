@@ -94,11 +94,15 @@ const main=document.querySelector('#mainVehicleImage');document.querySelectorAll
       const name = info.querySelector('h1')?.textContent.trim();
       const price = info.querySelector('.detail-price')?.textContent.trim();
       document.querySelectorAll('a[href*="wa.me/"]').forEach(link => {
-        updateLink(link, name, price, location.pathname + location.search);
+        updateLink(link, name, price, document.querySelector('link[rel="canonical"]')?.href || location.pathname + location.search);
       });
     }
   }
   updateVehicleLinks();
+  // Refresh immediately before navigation, including asynchronously cloned mobile buttons.
+  document.addEventListener('click', event => {
+    if (event.target.closest('a[href*="wa.me/"]')) updateVehicleLinks();
+  }, true);
   // Catalogue and vehicle content are also loaded asynchronously from the admin.
   ['vehicleGrid', 'latestGrid', 'vehicleDynamic'].forEach(id => {
     const root = document.getElementById(id);

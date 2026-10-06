@@ -20,7 +20,7 @@
         const detailUrl = vehicle.detail_url || ("/vehicules/annonce-" + encodeURIComponent(vehicle.slug) + ".html");
         const waText = encodeURIComponent(
           "Bonjour Mboa Auto, je souhaite avoir des informations sur " +
-          vehicle.name + " affiché à " + vehicle.price_display + "."
+          vehicle.name + " affiché à " + vehicle.price_display + ". Est-il toujours disponible ?\nLien de l’annonce : " + new URL(detailUrl, "https://mboaauto.com").href
         );
 
         return '<article class="card" data-catalog-order="' + (index + 1) + '" data-brand="' + esc(vehicle.brand) +
