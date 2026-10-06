@@ -13,7 +13,7 @@
           : [];
 
         latestGrid.innerHTML = latest.map(vehicle => {
-          const detailUrl = "/vehicules/vehicle.html?slug=" + encodeURIComponent(vehicle.slug);
+          const detailUrl = vehicle.detail_url || "/vehicules/annonce-" + encodeURIComponent(vehicle.slug) + ".html";
           return '<article class="card latest-card">' +
             '<a class="card-photo" href="' + detailUrl + '">' +
               '<img src="/assets/cars/' + esc(vehicle.slug) + '/' + esc(vehicle.cover || "01.jpg") + '" alt="' + esc(vehicle.name) + '" loading="lazy">' +

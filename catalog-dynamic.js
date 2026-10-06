@@ -17,7 +17,7 @@
       const available = vehicles.filter(v => v.status === "disponible");
 
       grid.innerHTML = available.map((vehicle, index) => {
-        const detailUrl = vehicle.detail_url || ("/vehicules/vehicle.html?slug=" + encodeURIComponent(vehicle.slug));
+        const detailUrl = vehicle.detail_url || ("/vehicules/annonce-" + encodeURIComponent(vehicle.slug) + ".html");
         const waText = encodeURIComponent(
           "Bonjour Mboa Auto, je souhaite avoir des informations sur " +
           vehicle.name + " affiché à " + vehicle.price_display + "."

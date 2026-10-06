@@ -5,7 +5,7 @@
     .then(response => response.ok ? response.json() : Promise.reject())
     .then(vehicles => {
       if (!Array.isArray(vehicles)) return;
-      const slug = new URLSearchParams(location.search).get('slug') || location.pathname.split('/').pop().replace(/\.html$/, '');
+      const slug = new URLSearchParams(location.search).get('slug') || location.pathname.split('/').pop().replace(/^annonce-/, '').replace(/\.html$/, '');
       const current = vehicles.find(v => v.slug === slug || v.detail_url === location.pathname);
       if (!current) return;
       const score = v => (v.type === current.type ? 2 : 0) + (v.brand === current.brand ? 1 : 0);
@@ -16,7 +16,7 @@
       section.className = 'section vehicle-suggestions';
       section.setAttribute('aria-labelledby', 'suggestionsTitle');
       section.innerHTML = '<div class="section-head"><div><p class="eyebrow">POUR CONTINUER VOTRE RECHERCHE</p><h2 id="suggestionsTitle">À découvrir aussi</h2><p>D’autres véhicules disponibles chez Mboa Auto.</p></div><a class="text-link" href="/#vehicules">Tout le catalogue →</a></div><div class="cards">' + suggestions.map(v => {
-        const href = esc(v.detail_url || '/vehicules/vehicle.html?slug=' + encodeURIComponent(v.slug));
+        const href = esc(v.detail_url || '/vehicules/annonce-' + encodeURIComponent(v.slug) + '.html');
         return '<article class="card"><a class="card-photo" href="'+href+'"><img src="/assets/cars/'+esc(v.slug)+'/'+esc(v.cover || '01.jpg')+'" alt="'+esc(v.name)+'" loading="lazy"><span class="tag">'+esc(v.type)+'</span></a><div class="card-body"><p class="card-brand">'+esc(v.brand)+' · '+esc(v.year)+'</p><h3><a href="'+href+'">'+esc(v.name)+'</a></h3><div class="price">'+esc(v.price_display)+'</div><p class="suggestion-meta">'+esc(v.fuel)+' · '+esc(v.location)+'</p><a class="details" href="'+href+'">Découvrir le véhicule →</a></div></article>';
       }).join('')+'</div>';
       const footer = document.querySelector('footer');

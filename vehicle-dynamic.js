@@ -2,7 +2,7 @@
   const root = document.getElementById("vehicleDynamic");
   if (!root) return;
 
-  const slug = new URLSearchParams(location.search).get("slug");
+  const slug = new URLSearchParams(location.search).get("slug") || location.pathname.match(/\/annonce-([a-z0-9-]+)(?:\.html)?$/)?.[1];
   if (!slug || !/^[a-z0-9-]+$/.test(slug)) {
     root.innerHTML = "<p>Véhicule introuvable.</p>";
     return;
@@ -18,9 +18,10 @@
       const v = Array.isArray(vehicles) ? vehicles.find(x => x.slug === slug) : null;
       if (!v) throw new Error("Véhicule introuvable");
 
-      document.title = v.name + " à vendre à " + v.location + " | Mboa Auto";
+      const model = v.name + (String(v.name).includes(String(v.year)) ? "" : " " + v.year);
+      document.title = model + " à " + v.location + " | Mboa Auto";
       const desc = document.querySelector('meta[name="description"]');
-      if (desc) desc.setAttribute("content", (v.description || "") + " Prix : " + v.price_display + ".");
+      if (desc) desc.setAttribute("content", model + " à vendre à " + v.location + ", Cameroun. " + v.fuel + " · " + v.type + ". Prix : " + v.price_display + ". Photos et contact direct avec Mboa Auto.");
 
       let canonical = document.querySelector('link[rel="canonical"]');
       if (!canonical) {
@@ -28,7 +29,9 @@
         canonical.rel = "canonical";
         document.head.appendChild(canonical);
       }
-      canonical.href = location.origin + "/vehicules/vehicle.html?slug=" + encodeURIComponent(slug);
+      canonical.href = location.origin + (v.detail_url || "/vehicules/annonce-" + encodeURIComponent(slug) + ".html");
+
+      if (root.querySelector(".vehicle-info")) return;
 
       const files = Array.isArray(v.photo_files) && v.photo_files.length
         ? v.photo_files
@@ -71,6 +74,7 @@
             '<div class="detail-spec"><strong>Caractéristiques</strong><p>' + esc(v.specs) + '</p></div>' +
             '<a class="btn wa-big" href="https://wa.me/237691650428?text=' + wa + '" target="_blank" rel="noopener noreferrer">Demander sur WhatsApp</a>' +
             '<a class="back-stock" href="/#vehicules">← Retour aux véhicules</a>' +
+            '<a class="back-stock" href="/acheter-depuis-etranger.html">Acheter depuis l’étranger →</a>' +
           '</aside>' +
         '</section>';
 
@@ -82,6 +86,7 @@
       });
     })
     .catch(err => {
+      if (root.querySelector(".vehicle-info")) return;
       root.innerHTML = '<div class="breadcrumbs"><a href="/">Accueil</a><span>›</span><span>Véhicule introuvable</span></div><p style="padding:40px 0">' + esc(err.message) + '.</p>';
     });
 })();
