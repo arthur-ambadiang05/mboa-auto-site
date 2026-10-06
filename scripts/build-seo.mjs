@@ -1,7 +1,21 @@
-import {readFileSync,writeFileSync} from 'node:fs';
+import {existsSync,readFileSync,writeFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 export function buildSeo(output) {
  const vehicles=JSON.parse(readFileSync(resolve(output,'data/vehicules.json'),'utf8'));
+ // Keep established vehicle URLs, including those already found by Google.
+ // Publish this mapping with the catalogue so every browser uses the same links.
+ let redirects=readFileSync(resolve(output,'_redirects'),'utf8').trimEnd()+'\n';
+ for(const v of vehicles) {
+  if(!/^[a-z0-9-]+$/.test(v.slug))throw new Error('Invalid slug');
+  const existing='/vehicules/'+v.slug+'.html';
+  if(!v.detail_url&&existsSync(resolve(output,existing.slice(1))))v.detail_url=existing;
+  if(v.detail_url) {
+   const alias='/vehicules/annonce-'+v.slug;
+   if(v.detail_url!==alias+'.html')redirects+=`${alias}.html ${v.detail_url} 301!\n${alias} ${v.detail_url} 301!\n`;
+  }
+ }
+ writeFileSync(resolve(output,'data/vehicules.json'),JSON.stringify(vehicles,null,2)+'\n');
+ writeFileSync(resolve(output,'_redirects'),redirects);
  const esc=value=>String(value??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
  const json=value=>JSON.stringify(value).replace(/</g,'\\u003c');
  const href=v=>v.detail_url||'/vehicules/annonce-'+v.slug+'.html';
@@ -16,6 +30,11 @@ export function buildSeo(output) {
  writeFileSync(resolve(output,'index.html'),index);
  const template=readFileSync(resolve(output,'vehicules/vehicle.html'),'utf8');
  let sitemap=readFileSync(resolve(output,'sitemap.xml'),'utf8');
+ // List each available vehicle once, at its preferred URL.
+ sitemap=sitemap.replace(/<url>\s*<loc>https:\/\/mboaauto\.com\/vehicules\/[^<]+<\/loc>[\s\S]*?<\/url>/g,'');
+ for(const v of vehicles.filter(v=>v.status==='disponible')) {
+  sitemap=sitemap.replace('</urlset>','<url><loc>'+esc('https://mboaauto.com'+href(v))+'</loc></url>\n</urlset>');
+ }
  for(const v of vehicles) {
   if(!/^[a-z0-9-]+$/.test(v.slug))throw new Error('Invalid slug');
   if(v.detail_url)continue;
@@ -29,7 +48,6 @@ export function buildSeo(output) {
   let html=template.replace(/<title>.*?<\/title>/s,'<title>'+esc(title)+'</title>').replace(/<meta name="description" content="[^"]*">/,'<meta name="description" content="'+esc(desc)+'">').replace(/<main id="vehicleDynamic" class="vehicle-page">.*?<\/main>/s,'<main id="vehicleDynamic" class="vehicle-page">'+body+'</main>');
   html=html.replace('</head>',`<link rel="canonical" href="${url}"><meta property="og:type" content="product"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${url}"><meta property="og:image" content="https://mboaauto.com${photo(cover)}"><script type="application/ld+json">${json(schema)}</script></head>`);
   writeFileSync(resolve(output,'vehicules/annonce-'+v.slug+'.html'),html);
-  if(v.status==='disponible')sitemap=sitemap.replace('</urlset>','<url><loc>'+esc(url)+'</loc></url>\n</urlset>');
  }
  writeFileSync(resolve(output,'sitemap.xml'),sitemap);
  console.log('SEO: catalogue lisible sans JavaScript et fiches véhicules avec titres, descriptions et sitemap.');
