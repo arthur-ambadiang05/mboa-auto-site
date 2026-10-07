@@ -1,22 +1,5 @@
 [
   {
-    "slug": "glc43-amg-2018",
-    "brand": "Mercedes-AMG",
-    "name": "GLC 43 AMG Coupé 4MATIC 2018",
-    "year": 2018,
-    "type": "SUV Coupé",
-    "fuel": "Essence",
-    "price": 35000000,
-    "price_display": "35 000 000 FCFA",
-    "location": "Yaoundé",
-    "specs": "V6 3.0L BiTurbo AMG • 9G-TRONIC • 4MATIC • 37 000 miles • Caméra 360° • Burmester • Toit ouvrant",
-    "description": "Mercedes-AMG GLC 43 Coupé 4MATIC 2018 import USA, V6 3.0L BiTurbo essence, boîte automatique 9G-TRONIC, 37 000 miles, peinture d’origine Rouge Hyacinth métallisé. SUV Mercedes d’occasion premium disponible à Yaoundé, Cameroun, avec caméra 360°, système Burmester, sièges chauffants électriques à mémoire, toit ouvrant, modes Sport/AMG Sport+, pneus Michelin Sport neufs et nombreux équipements. Carte grise, assurance, visite technique et plein offerts au prix affiché.",
-    "cover": "01.jpg",
-    "photos": 2,
-    "status": "disponible",
-    "detail_url": "/vehicules/glc43-amg-2018.html"
-  },
-  {
     "slug": "santa-fe",
     "brand": "Hyundai",
     "name": "Santa Fe Sport 2018",
