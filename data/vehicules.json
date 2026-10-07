@@ -232,7 +232,7 @@
   {
     "slug": "rav4-221",
     "brand": "Toyota",
-    "name": "RAV4 221",
+    "name": "RAV4 2021",
     "year": 2021,
     "type": "SUV",
     "fuel": "Essence",
@@ -259,6 +259,7 @@
       "12.jpg",
       "13.jpg"
     ],
-    "status": "disponible"
+    "status": "disponible",
+    "detail_url": "/vehicules/vehicle.html?slug=rav4-221"
   }
 ]
