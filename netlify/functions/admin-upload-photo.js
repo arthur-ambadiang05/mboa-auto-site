@@ -131,6 +131,26 @@ exports.handler = async function (event) {
       "Content-Type": "application/json"
     };
 
+    // A new listing must never replace the photos of an already published vehicle.
+    // Editing existing photos remains available through the edit form.
+    if (body.create === true) {
+      const registryResponse = await fetch(
+        `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/data/vehicules.json?ref=${GITHUB_BRANCH}`,
+        { headers }
+      );
+      if (!registryResponse.ok) {
+        return jsonResponse(502, { error: "Impossible de vérifier les annonces existantes" });
+      }
+      const registry = await registryResponse.json();
+      const vehicles = JSON.parse(Buffer.from(registry.content, "base64").toString("utf8"));
+      if (!Array.isArray(vehicles)) {
+        return jsonResponse(500, { error: "Liste des véhicules invalide" });
+      }
+      if (vehicles.some(vehicle => vehicle.slug === slug)) {
+        return jsonResponse(409, { error: "Cette annonce est déjà publiée. Rechargez le formulaire pour ajouter une autre voiture." });
+      }
+    }
+
    let existingSha = null;
 
 // Vérifie si la photo existe déjà sur GitHub

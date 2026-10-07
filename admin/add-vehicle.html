@@ -327,6 +327,12 @@
         .replace(/^-+|-+$/g, "");
     }
 
+    // Each physical car gets its own listing and photo directory, even with the same name.
+    function createListingSlug(name) {
+      return (createSlug(name) || "vehicule") + "-" + crypto.randomUUID();
+    }
+    let pendingListingSlug = null;
+
     function formatPrice(price) {
       return Number(price).toLocaleString("fr-FR") + " FCFA";
     }
@@ -354,9 +360,9 @@
     return;
   }
 
-  const slug = createSlug(formData.get("name"));
-
   try {
+    // Reuse the identifier after a failed upload; reset it only after successful publication.
+    const slug = pendingListingSlug || (pendingListingSlug = createListingSlug(formData.get("name")));
     // 1. Envoi des photos
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
@@ -425,6 +431,7 @@
           },
           body: JSON.stringify({
             slug,
+            create: true,
             filename,
             content
           })
@@ -486,6 +493,7 @@ const vehicle = {
     message.textContent =
       "Véhicule et photos ajoutés avec succès.";
 
+    pendingListingSlug = null;
     form.reset();
 
   } catch (error) {

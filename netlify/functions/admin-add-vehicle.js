@@ -167,7 +167,7 @@ exports.handler = async function (event) {
 
     if (vehicles.some((item) => item.slug === vehicle.slug)) {
       return jsonResponse(409, {
-        error: "Un véhicule avec ce nom existe déjà"
+        error: "Cette annonce existe déjà. Rechargez le formulaire pour publier un autre véhicule du même modèle."
       });
     }
 
