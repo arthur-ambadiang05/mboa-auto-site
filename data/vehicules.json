@@ -261,5 +261,39 @@
     ],
     "status": "disponible",
     "detail_url": "/vehicules/vehicle.html?slug=rav4-221"
+  },
+  {
+    "slug": "yaris-c203562b-d572-4f2a-8555-2502c5e689fe",
+    "brand": "Toyota",
+    "name": "Yaris",
+    "year": 2010,
+    "type": "Compacte",
+    "fuel": "Essence",
+    "price": 4500000,
+    "price_display": "4 500 000 FCFA",
+    "price_words": "Quatre millions cinq cents",
+    "location": "Yaoundé",
+    "specs": "Automatique essence 4x4 climatisation d'origine",
+    "description": "Voiture à vendre à Yaoundé\nToyota yaris 2010 automatique\nOccasion Japon\nMoteur essence 4 cylindres vvti\nClimatisé\n4x4 actif\nHyper propre\nDisponibilité immédiate.",
+    "cover": "01.jpg",
+    "photos": 15,
+    "photo_files": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "09.jpg",
+      "10.jpg",
+      "11.jpg",
+      "12.jpg",
+      "13.jpg",
+      "14.jpg",
+      "15.jpg"
+    ],
+    "status": "disponible"
   }
 ]
