@@ -295,5 +295,27 @@
       "15.jpg"
     ],
     "status": "disponible"
+  },
+  {
+    "slug": "rav4-15b0aa4a-dbf0-4a65-b1aa-0bace044a6db",
+    "brand": "Toyota",
+    "name": "Rav4",
+    "year": 2008,
+    "type": "SUV",
+    "fuel": "Essence",
+    "price": 5500000,
+    "price_display": "5 500 000 FCFA",
+    "price_words": "Cinq millions cinq cents",
+    "location": "Yaoundé",
+    "specs": "Automatique. Essence. 4x4. Climatisation",
+    "description": "Véhicule à vendre à Yaoundé\nTrès bon prix\nEn non état\nRAV4 2008\nBoîte automatique\nMoteur essence 4 cylindres\n4x4 actif\nClimatisé\nCe véhicule est une seconde main en bon état\nDisponible à Yaoundé biyem",
+    "cover": "01.jpg",
+    "photos": 3,
+    "photo_files": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ],
+    "status": "disponible"
   }
 ]
