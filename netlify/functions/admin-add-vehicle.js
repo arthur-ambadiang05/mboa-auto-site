@@ -171,6 +171,9 @@ exports.handler = async function (event) {
       });
     }
 
+    // Only new listings enter the Google queue; existing stock is never reposted.
+    // This flag is owned by the server, not by submitted form fields.
+    vehicle.google_sync_requested = true;
     vehicles.push(vehicle);
 
     const newContent = Buffer
@@ -211,6 +214,7 @@ exports.handler = async function (event) {
       success: true,
       message: "Véhicule ajouté avec succès",
       slug: vehicle.slug,
+      google_sync_requested: true,
       commit: result.commit?.sha || null
     });
 
