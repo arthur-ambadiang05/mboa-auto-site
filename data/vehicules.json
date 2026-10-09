@@ -352,5 +352,36 @@
       "16.jpg"
     ],
     "status": "disponible"
+  },
+  {
+    "slug": "ml350-6d060069-de71-4234-a38b-52eeaef5c975",
+    "brand": "Mercedes-Benz",
+    "name": "Ml350",
+    "year": 2013,
+    "type": "SUV",
+    "fuel": "Essence",
+    "price": 12500000,
+    "price_display": "12 500 000 FCFA",
+    "price_words": "Douze millions cinq cents",
+    "location": "Yaoundé",
+    "specs": "Mercedes ml350 2013 automatique essence sièges en cuir peinture d’origine 4*4 actif",
+    "description": "Voiture à vendreML350 4Matic 2013 occasion d'Europe juste 2 semaines à Yaoundé. Moteur V6 essence impeccable. Boite automatique. Climatisation glaciale. Volant direct. 4×4 très actif. Siège en cuir blanc électrique. Caméra de recule. Capteur de proximité. Commande au volant. Capteur de débordement de la ligne. Toit ouvrant. Clignotant sur rétroviseurs. Rétroviseurs électriques. Jante chromée sport. Peinture d'origine. Papier douane complèt.",
+    "cover": "01.jpg",
+    "photos": 12,
+    "photo_files": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "09.jpg",
+      "10.jpg",
+      "11.jpg",
+      "12.jpg"
+    ],
+    "status": "disponible"
   }
 ]
