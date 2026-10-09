@@ -317,5 +317,40 @@
       "03.jpg"
     ],
     "status": "disponible"
+  },
+  {
+    "slug": "glc300-6d7137ce-1899-401c-9d0c-a997c45b81c6",
+    "brand": "Mercedes-Benz",
+    "name": "Glc300",
+    "year": 2017,
+    "type": "SUV",
+    "fuel": "Essence",
+    "price": 17000000,
+    "price_display": "17 000 000 FCFA",
+    "price_words": "Dix sept millions",
+    "location": "Yaoundé",
+    "specs": "Automatique.essence v6. 4*4 .sieges en. Cuir",
+    "description": "Mercedes à vendre \nGlc 300 2017\nOccasion d’Europe \nAutomatique \nEssence \n3 jours au pays \nFull option. \nYaoundé\nVoiture à vendre",
+    "cover": "01.jpg",
+    "photos": 16,
+    "photo_files": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "09.jpg",
+      "10.jpg",
+      "11.jpg",
+      "12.jpg",
+      "13.jpg",
+      "14.jpg",
+      "15.jpg",
+      "16.jpg"
+    ],
+    "status": "disponible"
   }
 ]
