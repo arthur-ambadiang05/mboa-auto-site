@@ -29,7 +29,8 @@ export function buildSeo(output) {
  if(start<marker.length||end<0)throw new Error('Catalogue markup missing');
  index=index.slice(0,start)+cards+index.slice(end);
  writeFileSync(resolve(output,'index.html'),index);
- const template=readFileSync(resolve(output,'vehicules/vehicle.html'),'utf8');
+ const template=readFileSync(resolve(output,'vehicules/vehicle.html'),'utf8').replace('</head>','<link rel="stylesheet" href="/booking.css"></head>').replace('</body>','<script src="/catalog-tools.js" defer></script></body>');
+ writeFileSync(resolve(output,'vehicules/vehicle.html'),template);
  let sitemap=readFileSync(resolve(output,'sitemap.xml'),'utf8');
  // List each available vehicle once, at its preferred URL.
  sitemap=sitemap.replace(/<url>\s*<loc>https:\/\/mboaauto\.com\/vehicules\/[^<]+<\/loc>[\s\S]*?<\/url>/g,'');
@@ -41,7 +42,7 @@ export function buildSeo(output) {
   if(v.detail_url) {
    const path=resolve(output,v.detail_url.slice(1));
    if(existsSync(path)) {
-    const html=readFileSync(path,'utf8').replace(/href="https:\/\/wa\.me\/237691650428[^"]*"/g,'href="https://wa.me/237691650428?text='+encodeURIComponent(enquiry(v))+'"');
+    const html=readFileSync(path,'utf8').replace('</head>','<link rel="stylesheet" href="/booking.css"></head>').replace('</body>','<script src="/catalog-tools.js" defer></script></body>').replace(/href="https:\/\/wa\.me\/237691650428[^"]*"/g,'href="https://wa.me/237691650428?text='+encodeURIComponent(enquiry(v))+'"');
     writeFileSync(path,html);
    }
    continue;
