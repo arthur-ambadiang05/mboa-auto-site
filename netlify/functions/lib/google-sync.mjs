@@ -56,10 +56,12 @@ export async function validateKey(key, fetcher = fetch) {
 }
 export function postFor(vehicle) {
   if (!/^[a-z0-9-]+$/.test(vehicle.slug) || !/^[a-zA-Z0-9_.-]+\.(jpg|jpeg|png)$/i.test(vehicle.cover || '')) throw Error('Photo ou identifiant invalide');
+  const detail = vehicle.detail_url || `/vehicules/annonce-${vehicle.slug}.html`;
+  if (!/^\/vehicules\/[a-z0-9-]+\.html$/.test(detail)) throw Error('Lien invalide');
   const price = Number(vehicle.price);
   if (!Number.isFinite(price) || price <= 0) throw Error('Prix invalide');
   const summary = `${vehicle.name} ${vehicle.year} à vendre chez Mboa Auto.\n\n${vehicle.fuel} • ${vehicle.type}\nPrix : ${new Intl.NumberFormat('fr-FR').format(price)} FCFA\nLocalisation : ${vehicle.location}\n\nConsultez la fiche pour les photos et les caractéristiques. Contactez Mboa Auto pour confirmer la disponibilité et organiser une visite sur rendez-vous.`.slice(0, 1500);
-  return { language_code: 'fr', summary, photo_url: `${SITE}/assets/cars/${vehicle.slug}/${vehicle.cover}`, cta_type: 'LEARN_MORE', cta_url: `${SITE}/vehicules/${vehicle.slug}.html` };
+  return { language_code: 'fr', summary, photo_url: `${SITE}/assets/cars/${vehicle.slug}/${vehicle.cover}`, cta_type: 'LEARN_MORE', cta_url: `${SITE}${detail}` };
 }
 // One publication per unique vehicle. Claim before calling the external service;
 // uncertain replies never retry automatically, since the post may already exist.

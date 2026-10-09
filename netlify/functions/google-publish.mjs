@@ -3,4 +3,4 @@ export default async () => {
   try { await processOne(); } catch { console.error('Google synchronization unavailable'); }
   return new Response(null, { status: 204 });
 };
-export const config = { schedule: '*/15 * * * *' };
+export const config = { schedule: '* * * * *' };

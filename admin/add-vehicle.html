@@ -491,7 +491,12 @@ const vehicle = {
 
     message.style.color = "#22c55e";
     message.textContent =
-      "Véhicule et photos ajoutés avec succès. L’envoi à Google attend la mise en ligne et l’activation de la connexion dans Publications Google.";
+      "Véhicule et photos ajoutés. Si la connexion Google est activée, l’envoi sera déclenché dès que la fiche et la photo seront en ligne.";
+
+    const googleLink = document.createElement("a");
+    googleLink.href = "/admin/google.html";
+    googleLink.textContent = " Suivre l’envoi à Google →";
+    message.append(googleLink);
 
     pendingListingSlug = null;
     form.reset();
