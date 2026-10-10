@@ -415,5 +415,40 @@
     ],
     "status": "disponible",
     "google_sync_requested": true
+  },
+  {
+    "slug": "rav4-92028751-0dfc-4060-817f-a3908a6f131d",
+    "brand": "Toyota",
+    "name": "Rav4",
+    "year": 2014,
+    "type": "SUV",
+    "fuel": "Essence",
+    "price": 15500000,
+    "price_display": "15 500 000 FCFA",
+    "price_words": "Quinze millions cinq cents",
+    "location": "Yaoundé",
+    "specs": "Automatique essence 4x4 climatisation d'origine",
+    "description": "Voiture à vendre ! \nToyota Rav4 2014 limited occasion d'Europe 1er choix très propre. Moteur vvti essence impeccable. Boite automatique. Volant direct. Climatisation glaciale. 4×4 très actif. Commande au volant. Toit ouvrant. Verrouillage centralisé . 4 capteur de proximité. Malle arrière électrique.Clignotant sur rétroviseurs. Rétroviseurs  électriques. 5 places familiales avec mémoire de sièges avant . Siège en cuir noir électrique . Jante chromée. Peinture noire présidentielle. Dossiers douane complèt. Visible sur Yaoundé.\nPrix 15,5 millions\nContact 691650428\n#voitureavendre #toyotarav4 #4x4",
+    "cover": "01.jpg",
+    "photos": 15,
+    "photo_files": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "09.jpg",
+      "10.jpg",
+      "11.jpg",
+      "12.jpg",
+      "13.jpg",
+      "14.jpg",
+      "15.jpg"
+    ],
+    "status": "disponible",
+    "google_sync_requested": true
   }
 ]
