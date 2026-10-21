@@ -514,5 +514,35 @@
     ],
     "status": "disponible",
     "google_sync_requested": true
+  },
+  {
+    "slug": "corolla-altis-3d8db22b-42a8-4361-8401-6736dab84148",
+    "brand": "Toyota",
+    "name": "Corolla altis",
+    "year": 2018,
+    "type": "Berline",
+    "fuel": "Essence",
+    "price": 7500000,
+    "price_display": "7 500 000 FCFA",
+    "price_words": "Sept millions cinq cents",
+    "location": "Yaoundé",
+    "specs": "Corolla altis à vendre,automatique,essence,70.000 milles,occasion Europe,",
+    "description": "Toyota Corolla \n2018\nOccasion Europe \nAutomatique \nEssence \n4cylindres \nClimatisé \n70.000 milles \nLecteur audio et cd tactile \nPhares antibrouillards \nOccasion limitée et rare \nPrix 7.5 millions \nYaoundé",
+    "cover": "01.jpg",
+    "photos": 10,
+    "photo_files": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "09.jpg",
+      "10.jpg"
+    ],
+    "status": "disponible",
+    "google_sync_requested": true
   }
 ]
