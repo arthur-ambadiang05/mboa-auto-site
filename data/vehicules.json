@@ -482,5 +482,37 @@
     "status": "disponible",
     "google_sync_requested": true,
     "detail_url": "/vehicules/vehicle.html?slug=rav4-203-4cb6b061-72e9-4125-b444-9fe9f118e6a0"
+  },
+  {
+    "slug": "pilote-d7407b1a-18e7-41b9-9dd9-efcabe5f480d",
+    "brand": "Honda",
+    "name": "Pilote",
+    "year": 2024,
+    "type": "SUV",
+    "fuel": "Essence",
+    "price": 33000000,
+    "price_display": "33 000 000 FCFA",
+    "price_words": "Trente trois millions",
+    "location": "Yaoundé",
+    "specs": "Honda pilote 2024 à vendre Automatique.essence.occasion Europe",
+    "description": "Honda Pilot 2024 occasion États-Unis\nClimatisation D'origine\nCommandé aux volant\nClignotant aux rétroviseurs\nDémarrage a boutons\nNon immatriculé\nPapier douane complet\nSiège en cuir\nCapteur de Proximité\nToit ouvrant\nMoteur V6.\nSystème 4×4 actif\nÉcran tactile vidéo bluetooth\nCaméra de recul\n7 Placés\nPeinture d'origine\nFull options\nPrix 32Millions\nVisible",
+    "cover": "01.jpg",
+    "photos": 12,
+    "photo_files": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "09.jpg",
+      "10.jpg",
+      "11.jpg",
+      "12.jpg"
+    ],
+    "status": "disponible",
+    "google_sync_requested": true
   }
 ]
