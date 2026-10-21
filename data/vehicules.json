@@ -454,7 +454,7 @@
   {
     "slug": "rav4-203-4cb6b061-72e9-4125-b444-9fe9f118e6a0",
     "brand": "Toyota",
-    "name": "RAV4 203",
+    "name": "RAV4",
     "year": 2003,
     "type": "SUV",
     "fuel": "Essence",
@@ -480,6 +480,7 @@
       "11.jpg"
     ],
     "status": "disponible",
-    "google_sync_requested": true
+    "google_sync_requested": true,
+    "detail_url": "/vehicules/vehicle.html?slug=rav4-203-4cb6b061-72e9-4125-b444-9fe9f118e6a0"
   }
 ]
