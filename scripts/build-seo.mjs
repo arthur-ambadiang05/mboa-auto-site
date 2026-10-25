@@ -1,4 +1,4 @@
-import {existsSync,readFileSync,writeFileSync} from 'node:fs';
+import {existsSync,readFileSync,writeFileSync,readdirSync} from 'node:fs';
 import {resolve} from 'node:path';
 export function buildSeo(output) {
  const vehicles=JSON.parse(readFileSync(resolve(output,'data/vehicules.json'),'utf8'));
@@ -7,6 +7,9 @@ export function buildSeo(output) {
  let redirects=readFileSync(resolve(output,'_redirects'),'utf8').trimEnd()+'\n';
  for(const v of vehicles) {
   if(!/^[a-z0-9-]+$/.test(v.slug))throw new Error('Invalid slug');
+  // Query-driven templates have no vehicle content in the initial HTML.
+  // Publish an individual static page while keeping the old template accessible.
+  if(v.detail_url?.startsWith('/vehicules/vehicle.html?'))delete v.detail_url;
   const existing='/vehicules/'+v.slug+'.html';
   if(!v.detail_url&&existsSync(resolve(output,existing.slice(1))))v.detail_url=existing;
   if(v.detail_url) {
@@ -53,11 +56,29 @@ export function buildSeo(output) {
   const photo=file=>'/assets/cars/'+esc(v.slug)+'/'+esc(file);
   const facts=[['Année',v.year],['Carburant',v.fuel],['Type',v.type],['Localisation',v.location]];
   const body=`<div class="breadcrumbs"><a href="/">Accueil</a><span>›</span><a href="/#vehicules">Voitures au Cameroun</a><span>›</span><span>${esc(v.name)}</span></div><section class="vehicle-detail"><div class="detail-gallery"><div class="detail-main"><img id="mainVehicleImage" src="${photo(cover)}" alt="${esc(model(v))} à vendre à ${esc(v.location)}"></div><div class="detail-thumbs">${ordered.map((file,i)=>`<button class="detail-thumb" data-src="${photo(file)}"><img src="${photo(file)}" alt="${esc(v.name)} photo ${i+1}" loading="lazy"></button>`).join('')}</div></div><aside class="vehicle-info"><p class="eyebrow">${esc(v.brand)} · ${esc(v.year)}</p><h1>${esc(v.name)}</h1><div class="detail-price">${esc(v.price_display)}</div><p class="detail-desc">${esc(v.description)}</p><div class="fact-grid">${facts.map(([label,value])=>`<span><small>${label}</small><strong>${esc(value)}</strong></span>`).join('')}</div><div class="detail-spec"><strong>Caractéristiques</strong><p>${esc(v.specs)}</p></div><a class="btn wa-big" href="https://wa.me/237691650428?text=${encodeURIComponent(enquiry(v)) }" target="_blank" rel="noopener noreferrer">Demander sur WhatsApp</a><a class="back-stock" href="/#vehicules">← Retour aux véhicules</a><a class="back-stock" href="/acheter-depuis-etranger.html">Acheter depuis l’étranger →</a></aside></section>`;
-  const schema={'@context':'https://schema.org','@type':'Car',name:model(v),brand:{'@type':'Brand',name:v.brand},model:v.name,vehicleModelDate:String(v.year),fuelType:v.fuel,description:v.description,image:'https://mboaauto.com'+photo(cover),url,offers:{'@type':'Offer',price:v.price,priceCurrency:'XAF',availability:'https://schema.org/'+(v.status==='disponible'?'InStock':'OutOfStock'),url,seller:{'@type':'AutomotiveBusiness',name:'Mboa Auto',url:'https://mboaauto.com/'}}};
+  const schema={'@context':'https://schema.org','@type':['Product','Car'],name:model(v),brand:{'@type':'Brand',name:v.brand},model:v.name,vehicleModelDate:String(v.year),fuelType:v.fuel,description:v.description,image:'https://mboaauto.com'+photo(cover),url,offers:{'@type':'Offer',price:v.price,priceCurrency:'XAF',availability:'https://schema.org/'+(v.status==='disponible'?'InStock':'OutOfStock'),url,seller:{'@type':'AutomotiveBusiness',name:'Mboa Auto',url:'https://mboaauto.com/'}}};
   let html=template.replace(/<title>.*?<\/title>/s,'<title>'+esc(title)+'</title>').replace(/<meta name="description" content="[^"]*">/,'<meta name="description" content="'+esc(desc)+'">').replace(/<main id="vehicleDynamic" class="vehicle-page">.*?<\/main>/s,'<main id="vehicleDynamic" class="vehicle-page">'+body+'</main>');
   html=html.replace('</head>',`<link rel="canonical" href="${url}"><meta property="og:type" content="product"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${url}"><meta property="og:image" content="https://mboaauto.com${photo(cover)}"><script type="application/ld+json">${json(schema)}</script></head>`);
   html=html.replace(/href="https:\/\/wa\.me\/237691650428[^"]*"/g,'href="https://wa.me/237691650428?text='+encodeURIComponent(enquiry(v))+'"');
   writeFileSync(resolve(output,'vehicules/annonce-'+v.slug+'.html'),html);
+ }
+ // Existing detail pages also need Product in addition to Car for Google product snippets.
+ for (const entry of readdirSync(resolve(output,'vehicules'))) {
+  if (!entry.endsWith('.html')) continue;
+  const path=resolve(output,'vehicules',entry);
+  const html=readFileSync(path,'utf8').replace(/(<script\b[^>]*type="application\/ld\+json"[^>]*>)([\s\S]*?)(<\/script>)/g,(match,open,body,close)=>{
+   const data=JSON.parse(body);
+   const addProduct=node=>{
+    if (!node || typeof node!=='object') return;
+    const types=Array.isArray(node['@type'])?node['@type']:[node['@type']];
+    if(types.some(type=>['Car','Vehicle'].includes(type)) && node.offers && !types.includes('Product')) node['@type']=['Product',...types];
+    if(Array.isArray(node))node.forEach(addProduct);
+    if(Array.isArray(node['@graph']))node['@graph'].forEach(addProduct);
+   };
+   addProduct(data);
+   return open+json(data)+close;
+  });
+  writeFileSync(path,html);
  }
  writeFileSync(resolve(output,'sitemap.xml'),sitemap);
  console.log('SEO: catalogue lisible sans JavaScript et fiches véhicules avec titres, descriptions et sitemap.');
