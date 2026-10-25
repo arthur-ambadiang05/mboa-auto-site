@@ -544,5 +544,32 @@
     ],
     "status": "disponible",
     "google_sync_requested": true
+  },
+  {
+    "slug": "auris-16f0fccb-1cce-4c31-9a28-a49809a2b5b7",
+    "brand": "Toyota",
+    "name": "Auris",
+    "year": 2012,
+    "type": "Compacte",
+    "fuel": "Essence",
+    "price": 5500000,
+    "price_display": "5 500 000 FCFA",
+    "price_words": "Cinq millions cinq cents mille",
+    "location": "Yaoundé",
+    "specs": "Toyota Auris 2012 Occasion Angleterre Boîte Automatique Moteur essence 1NZ-FE  Vvti 4cylindres  Climatisé Peinture d'origine Prix 5,5 millions Disponible à Yaoundé barrière ahala Contact 691650428",
+    "description": "Toyota Auris 2012\nOccasion Angleterre\nBoîte Automatique\nMoteur essence 1NZ-FE \nVvti 4cylindres \nClimatisé\nPeinture d'origine\nPrix 5,5 millions\nDisponible à Yaoundé barrière ahala\nContact 691650428",
+    "cover": "01.jpg",
+    "photos": 7,
+    "photo_files": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg"
+    ],
+    "status": "disponible",
+    "google_sync_requested": true
   }
 ]
