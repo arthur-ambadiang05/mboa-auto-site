@@ -61,7 +61,7 @@
     "description": "Toyota RAV4 4×4 automatique essence, disponible à Yaoundé.",
     "cover": "02.jpg",
     "photos": 6,
-    "status": "disponible"
+    "status": "reserve"
   },
   {
     "slug": "tundra",
