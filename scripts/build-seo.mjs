@@ -31,6 +31,11 @@ export function buildSeo(output) {
  const end=index.indexOf('</div></section>',start);
  if(start<marker.length||end<0)throw new Error('Catalogue markup missing');
  index=index.slice(0,start)+cards+index.slice(end);
+ // Render the first selection without waiting for a browser catalogue request.
+ const latestCards=[...cards.matchAll(/<article\b[\s\S]*?<\/article>/g)].map(match=>match[0]).reverse().slice(0,3).join('');
+ index=index.replace(/(<div class="cards latest-grid" id="latestGrid">)[\s\S]*?(<\/div><\/section>)/,(_,open,close)=>open+latestCards+close);
+ const availableCount=vehicles.filter(v=>v.status==='disponible').length;
+ index=index.replace(/(<span class="inventory-count">)[\s\S]*?(<\/span>)/,(_,open,close)=>open+availableCount+' véhicule'+(availableCount===1?'':'s')+close);
  writeFileSync(resolve(output,'index.html'),index);
  const template=readFileSync(resolve(output,'vehicules/vehicle.html'),'utf8').replace('</head>','<link rel="stylesheet" href="/booking.css"></head>').replace('</body>','<script src="/catalog-tools.js" defer></script></body>');
  writeFileSync(resolve(output,'vehicules/vehicle.html'),template);
