@@ -139,7 +139,17 @@ exports.handler = async function (event) {
         { headers }
       );
       if (!registryResponse.ok) {
-        return jsonResponse(502, { error: "Impossible de vérifier les annonces existantes" });
+        const upstreamStatus = registryResponse.status;
+        console.error("GitHub registry read failed", {
+          status: upstreamStatus,
+          requestId: registryResponse.headers.get("x-github-request-id")
+        });
+        const error = upstreamStatus === 401
+          ? "La connexion du site à GitHub a expiré ou est invalide. Reconnectez GitHub dans la configuration Netlify."
+          : upstreamStatus === 403 || upstreamStatus === 429
+            ? "GitHub refuse temporairement l’accès au catalogue (droits ou limite de requêtes). Vérifiez la connexion GitHub dans Netlify."
+            : "Impossible de vérifier les annonces existantes. Réessayez dans quelques minutes.";
+        return jsonResponse(502, { error, code: "GITHUB_REGISTRY_READ_FAILED", upstreamStatus });
       }
       const registry = await registryResponse.json();
       const vehicles = JSON.parse(Buffer.from(registry.content, "base64").toString("utf8"));
