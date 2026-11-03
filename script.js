@@ -315,7 +315,7 @@ document.addEventListener('click',e=>{
     .mboa-site-share{padding:16px 24px;background:#071017;text-align:center}.mboa-site-share .mboa-share-button{border-color:#71808a}
     .mboa-share-dialog{width:min(420px,calc(100% - 32px));max-height:85vh;overflow:auto;padding:24px;border:0;border-radius:18px;background:#fff;color:#10212c;box-sizing:border-box;box-shadow:0 20px 80px #0005}
     .mboa-share-dialog::backdrop{background:#0009}.mboa-share-dialog h2{margin:0 0 12px;font:700 22px/1.3 system-ui}.mboa-share-dialog p{overflow-wrap:anywhere}
-    .mboa-share-options{display:grid;gap:10px}.mboa-share-options a{color:#10212c}.mboa-share-dialog input{width:100%;box-sizing:border-box;padding:12px;margin:12px 0;border:1px solid #aeb8c0;border-radius:8px;font:14px system-ui}.mboa-share-feedback{min-height:24px;font:14px system-ui}
+    .mboa-share-options{display:grid;gap:10px}.mboa-share-options [hidden]{display:none}.mboa-share-options a{color:#10212c}.mboa-share-dialog input{width:100%;box-sizing:border-box;padding:12px;margin:12px 0;border:1px solid #aeb8c0;border-radius:8px;font:14px system-ui}.mboa-share-feedback{min-height:24px;font:14px system-ui}
   `;
   document.head.append(style);
   const dialog = document.createElement('dialog');
