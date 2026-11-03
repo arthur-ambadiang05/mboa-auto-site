@@ -599,5 +599,34 @@
     ],
     "status": "disponible",
     "google_sync_requested": true
+  },
+  {
+    "slug": "toyota-vxr-f56f0528-fcb3-4c79-aa15-7860513e08ac",
+    "brand": "Toyota",
+    "name": "Toyota vxr",
+    "year": 2025,
+    "type": "SUV",
+    "fuel": "Essence",
+    "price": 110000000,
+    "price_display": "110 000 000 FCFA",
+    "price_words": "Cent dix millions",
+    "location": "Yaoundé",
+    "specs": "110 millions  Land cruiser VXR 2025 Acheté maison depuis l'Europe  Automatique  Moteur V6 Twin - turbo hybride (3,5L) moteur électrique  457chevaux, 10 vitesses auto, 4WD permanent, réservoir 110L, longueur 5145mm, largeur 1980mm, hauteur 1890mm, Garde au sol -245 mm,poids 3120Kg, jantes 20 pouces 265/55R20  7 places en cuir, siège avant électriques chauffants/ventilés,4zones de clim auto, chargeur sans Fil, écran principal 12,3\", compteur numérique 12,3\"  14 haut -parleur JBL,prise 220V 1500W,toit ouvrant, LED,Feux brouillard LED, barres de toit intégrées, marchepieds,hayon électriques, baguettes chromées,aerokit,12 airbags, caméra 360°+3D,multi -terrain, monitor avec lave -camera, Crawl contrôle, blocage différentiel arrière LSD, régulateur radar full-speed, freinage d'urgence, pré -collision capteur avant/arrière  Yaoundé",
+    "description": "110 millions \nLand cruiser VXR 2025\nAcheté maison depuis l'Europe \nAutomatique \nMoteur V6 Twin - turbo hybride (3,5L) moteur électrique \n457chevaux, 10 vitesses auto, 4WD permanent, réservoir 110L, longueur 5145mm, largeur 1980mm, hauteur 1890mm, Garde au sol -245 mm,poids 3120Kg, jantes 20 pouces 265/55R20 \n7 places en cuir, siège avant électriques chauffants/ventilés,4zones de clim auto, chargeur sans Fil, écran principal 12,3\", compteur numérique 12,3\"  14 haut -parleur JBL,prise 220V 1500W,toit ouvrant, LED,Feux brouillard LED, barres de toit intégrées, marchepieds,hayon électriques, baguettes chromées,aerokit,12 airbags, caméra 360°+3D,multi -terrain, monitor avec lave -camera, Crawl contrôle, blocage différentiel arrière LSD, régulateur radar full-speed, freinage d'urgence, pré -collision capteur avant/arrière \nYaoundé sur rendez-vous",
+    "cover": "01.jpg",
+    "photos": 9,
+    "photo_files": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "09.jpg"
+    ],
+    "status": "disponible",
+    "google_sync_requested": true
   }
 ]
