@@ -649,5 +649,33 @@
     ],
     "status": "disponible",
     "google_sync_requested": true
+  },
+  {
+    "slug": "cla250-4matic-3d181ff0-ac9a-4583-885a-a53b20face62",
+    "brand": "Mercedes-Benz",
+    "name": "Cla250 4matic",
+    "year": 2015,
+    "type": "Coupé",
+    "fuel": "Essence",
+    "price": 9000000,
+    "price_display": "9 000 000 FCFA",
+    "price_words": "Neuf millions",
+    "location": "Yaoundé",
+    "specs": "Automatique. Essence.4clyndres.climatisé",
+    "description": "Prix : 9 millions \n\nMercedes CLA 2015\nOccasion Europe \nBoite automatique\nMoteur essence 4 cylindre\nClimatisation glaciale\nPeinture d’origine \nCaméra de recule \nFull option HD\nContact 691650428",
+    "cover": "01.jpg",
+    "photos": 8,
+    "photo_files": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg"
+    ],
+    "status": "disponible",
+    "google_sync_requested": true
   }
 ]
