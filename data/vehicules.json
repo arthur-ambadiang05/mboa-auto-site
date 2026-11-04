@@ -628,5 +628,26 @@
     ],
     "status": "disponible",
     "google_sync_requested": true
+  },
+  {
+    "slug": "rx350-0e3d32fd-4df8-4da0-97ba-e4d3b6b60ae2",
+    "brand": "Lexus",
+    "name": "Rx350",
+    "year": 2017,
+    "type": "SUV",
+    "fuel": "Essence",
+    "price": 20000000,
+    "price_display": "20 000 000 FCFA",
+    "price_words": "Vingt millions",
+    "location": "Yaoundé",
+    "specs": "Lexus rx350 .automatique.essence.full options",
+    "description": "LEXUS RX 2017*\n boite automatique \nénergie: essence \néquipée d’un 4x4 robuste\nvéhicule tout terrain \n⁠peinture d’origine \npapier à jour prêt à voyager \n ⁠climatisée\nvéhicule full options \ndisponible immédiatement \nPrix: 20 millionsfcfa",
+    "cover": "01.jpg",
+    "photos": 1,
+    "photo_files": [
+      "01.jpg"
+    ],
+    "status": "disponible",
+    "google_sync_requested": true
   }
 ]
