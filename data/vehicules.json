@@ -677,5 +677,40 @@
     ],
     "status": "disponible",
     "google_sync_requested": true
+  },
+  {
+    "slug": "rav4-b18d7000-b22c-4bf9-b115-2df298841a1f",
+    "brand": "Toyota",
+    "name": "RAV4",
+    "year": 2015,
+    "type": "SUV",
+    "fuel": "Essence",
+    "price": 15000000,
+    "price_display": "15 000 000 FCFA",
+    "price_words": "Quinze millions",
+    "location": "Yaoundé",
+    "specs": "Toyota RAV4 Année 2014, Occasion USA Dossier douane complet, Automatique volant direct, Essence 4 cylindres, Climatisée, 5 places assises, 4×4 Actif,  Toutes Options Comprises,  Prix : 15.000.000FCFA  Yaoundé",
+    "description": "Toyota RAV4 Année 2014,\nOccasion USA\nDossier douane complet,\nAutomatique volant direct,\nEssence 4 cylindres,\nClimatisée,\n5 places assises,\n4×4 Actif, \nToutes Options Comprises,\n\nPrix : 15.000.000FCFA\n\nYaoundé contact 691650428",
+    "cover": "01.jpg",
+    "photos": 15,
+    "photo_files": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "09.jpg",
+      "10.jpg",
+      "11.jpg",
+      "12.jpg",
+      "13.jpg",
+      "14.jpg",
+      "15.jpg"
+    ],
+    "status": "disponible",
+    "google_sync_requested": true
   }
 ]
