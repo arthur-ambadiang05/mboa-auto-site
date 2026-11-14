@@ -712,5 +712,35 @@
     ],
     "status": "disponible",
     "google_sync_requested": true
+  },
+  {
+    "slug": "landcruiser-prado-txl-e35ef879-4307-4905-8cd7-65059c425cfc",
+    "brand": "Toyota",
+    "name": "Landcruiser prado TXL",
+    "year": 2016,
+    "type": "SUV",
+    "fuel": "Diesel",
+    "price": 20000000,
+    "price_display": "20 000 000 FCFA",
+    "price_words": "Vingt millions",
+    "location": "Yaoundé",
+    "specs": "Prado TXL 2016 d'origine  Reprise cami  Manuelle  Moteur 5L diesel  Climatisation et peinture d'origine  4*4 actif  Habitacle impeccable  Yaoundé sur rendez-vous",
+    "description": "20 millions\nPrado TXL 2016 d'origine \nReprise cami \nManuelle \nMoteur 5L diesel \nClimatisation et peinture d'origine \n4*4 actif \nHabitacle impeccable \nYaoundé sur rendez-vous",
+    "cover": "01.jpg",
+    "photos": 10,
+    "photo_files": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "09.jpg",
+      "10.jpg"
+    ],
+    "status": "disponible",
+    "google_sync_requested": true
   }
 ]
